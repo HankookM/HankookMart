@@ -183,6 +183,13 @@
             width: 100%;
             text-align: right;
         }
+        .product-spec {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+            width: 100%;
+            text-align: center;
+        }
         .price {
             color: #c62828;
             font-size: 34px;
@@ -282,15 +289,16 @@
 const PRODUCTS = {
   top: [
     {
-      name: "꿀맛 부사 사과 (1봉)",
+      name: "산지직송 성주 꿀참외 (1봉)",
       oldPrice: 15000,
+      spec: "6개/봉",
       price: 9900,
       badge: "NEW",
       badgeType: "new",
       review: null,
       unit: "원",
       img: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80",
-      alt: "꿀맛 부사 사과"
+      alt: "산지직송 성주 꿀참외"
     },
     {
       name: "꿀맛 부사 사과 (1봉)",
@@ -525,6 +533,10 @@ function createCard(p) {
     ? `<span class="badge ${p.badgeType === 'new' ? 'badge-new' : 'badge-limit'}">${p.badge}</span>`
     : "";
 
+  const specHtml = p.spec
+    ? `<div class="product-spec">${p.spec}</div>`
+    : "";
+    
   const priceHtml = p.unit
     ? `<div class="price">${p.price.toLocaleString()}<span class="unit">${p.unit}</span></div>`
     : `<div class="price">${p.price.toLocaleString()}원</div>`;
