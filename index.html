@@ -184,7 +184,7 @@
             text-align: right;
         }
         .product-spec {
-            font-size: 13px;
+            font-size: 16px;
             color: #666;
             margin-bottom: 6px;
             width: 100%;
@@ -260,12 +260,13 @@
             </div>
             <div class="store-info">
                 <div>📅 행사기간: 1/1(월) ~ 1/31(목)</div>
-                <div>📞 문의전화: 02-1234-5678</div>
-            </div>
+                <div>📞 문의전화: 031-655-8431</div>
+            </div> 
             <div class="tab-nav">
                 <button class="active" onclick="scrollToSection('banner-top', this)">전체상품</button>
                 <button onclick="scrollToSection('banner-meat', this)">정육코너</button>
                 <button onclick="scrollToSection('banner-fruit', this)">과일코너</button>
+                <button onclick="scrollToSection('banner-grocery', this)">공산코너</button>
             </div>
         </div>
 
@@ -278,9 +279,12 @@
 
             <div id="banner-fruit" class="section-banner">🍇 과일코너 특가</div>
             <div id="fruit-section" class="product-grid"></div>
+
+            <div id="banner-grocery" class="section-banner">🛒 공산코너 특가</div>
+            <div id="grocery-section" class="product-grid"></div>
         </div>
 
-        <div class="footer">📞 문의전화: 02-1234-5678<br>※ 조기 품절될 수 있습니다.</div>
+        <div class="footer">📞 문의전화: 031-655-8431<br>※ 조기 품절될 수 있습니다.</div>
     </div>
     <button class="btn-top" onclick="scrollToSection('banner-top')">▲ TOP</button>
 
@@ -290,10 +294,10 @@ const PRODUCTS = {
   top: [
     {
       name: "산지직송 성주 꿀참외 (1봉)",
+      badge: "NEW",
       oldPrice: 15000,
       spec: "6개/봉",
       price: 9900,
-      badge: "NEW",
       badgeType: "new",
       review: null,
       unit: "원",
@@ -301,15 +305,16 @@ const PRODUCTS = {
       alt: "산지직송 성주 꿀참외"
     },
     {
-      name: "꿀맛 부사 사과 (1봉)",
-      oldPrice: 15000,
-      price: 9900,
-      badge: null,
-      badgeType: null,
+      name: "신라면",
+      oldPrice: 4800,
+      spec: "5입/멀티",
+      price: 3,480,
+      badge: "1가정 2봉",
+      badgeType: "limit",
       review: null,
       unit: "원",
-      img: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80",
-      alt: "꿀맛 부사 사과"
+      img: "resource/grocery/sinrameun.jpg",
+      alt: "신라면"
     },
     {
       name: "꿀맛 부사 사과 (1봉)",
@@ -357,7 +362,7 @@ const PRODUCTS = {
       img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
       alt: "국내산 생삼겹살"
     },
-    {
+    /*{
       name: "국내산 생삼겹살4 (600g)",
       oldPrice: 22000,
       price: 14500,
@@ -422,7 +427,7 @@ const PRODUCTS = {
       unit: "원",
       img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
       alt: "국내산 생삼겹살"
-    }
+    }*/
   ],
   fruit: [
     {
@@ -458,7 +463,7 @@ const PRODUCTS = {
       img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
       alt: "샤인머스캣"
     },
-    {
+    /*{
       name: "샤인머스캣(냉장)",
       oldPrice: 25000,
       price: 19800,
@@ -523,7 +528,70 @@ const PRODUCTS = {
       unit: "원/100g",
       img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
       alt: "샤인머스캣"
-    }
+    }*/
+  ],
+
+  grocery: [   
+    {
+      name: "CJ 햇반 박스",
+      oldPrice: 18000,
+      price: 13900,
+      spec: "12개입/박스",
+      badge: "한정",
+      badgeType: "limit",
+      review: null,
+      unit: "원",
+      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
+      alt: "CJ 햇반"
+    },
+    {
+      name: "CJ 햇반 박스",
+      oldPrice: 18000,
+      price: 13900,
+      spec: "12개입/박스",
+      badge: "한정",
+      badgeType: "limit",
+      review: null,
+      unit: "원",
+      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
+      alt: "CJ 햇반"
+    },
+    {
+      name: "CJ 햇반 박스",
+      oldPrice: 18000,
+      price: 13900,
+      spec: "12개입/박스",
+      badge: "한정",
+      badgeType: "limit",
+      review: null,
+      unit: "원",
+      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
+      alt: "CJ 햇반"
+    },
+    {
+      name: "CJ 햇반 박스",
+      oldPrice: 18000,
+      price: 13900,
+      spec: "12개입/박스",
+      badge: "한정",
+      badgeType: "limit",
+      review: null,
+      unit: "원",
+      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
+      alt: "CJ 햇반"
+    },
+    {
+      name: "CJ 햇반 박스",
+      oldPrice: 18000,
+      price: 13900,
+      spec: "12개입/박스",
+      badge: "한정",
+      badgeType: "limit",
+      review: null,
+      unit: "원",
+      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
+      alt: "CJ 햇반"
+    },
   ]
 };
 
@@ -561,6 +629,7 @@ function renderAll() {
   document.getElementById("top-section").innerHTML   = PRODUCTS.top.map(createCard).join("");
   document.getElementById("meat-section").innerHTML  = PRODUCTS.meat.map(createCard).join("");
   document.getElementById("fruit-section").innerHTML = PRODUCTS.fruit.map(createCard).join("");
+  document.getElementById("grocery-section").innerHTML = PRODUCTS.grocery.map(createCard).join("");
   initScrollFade();
 }
 
@@ -593,7 +662,7 @@ function scrollToSection(id, btn) {
 }
 
 // 탭 자동 활성화
-const sectionIds = ['banner-top', 'banner-meat', 'banner-fruit'];
+const sectionIds = ['banner-top', 'banner-meat', 'banner-fruit', 'banner-grocery'];
 const tabMap = {};
 sectionIds.forEach(id => {
   tabMap[id] = document.querySelector(`button[onclick*="${id}"]`);
