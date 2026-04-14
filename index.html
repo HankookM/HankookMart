@@ -307,7 +307,7 @@ const PRODUCTS = {
       img: "https://oasisprodproduct.edge.naverncp.com/72591/detail/detail_72591_0_5a6f649a-1019-4895-89aa-f9da26049493.jpg",
       alt: "산지직송 성주 꿀참외"
     },
-    {
+    /*{
       name: "신라면",
       oldPrice: 4800,
       spec: "5입/멀티",
@@ -318,7 +318,7 @@ const PRODUCTS = {
       unit: "원",
       img: "resource/grocery/shinramyun.jpg",
       alt: "신라면"
-    },
+    },*/
     {
       name: "꿀맛 부사 사과 (1봉)",
       oldPrice: 15000,
@@ -547,56 +547,320 @@ const PRODUCTS = {
       badgeType: "limit",
       review: null,
       unit: "원",
-      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
+      img: "resource/grocery/hatban.jpg",
       alt: "CJ 햇반"
     },
     {
-      name: "CJ 햇반 박스",
-      oldPrice: 18000,
-      price: 13900,
-      spec: "12개입/박스",
-      badge: "한정",
-      badgeType: "limit",
+      name: "슈퍼오닝",
+      oldPrice: 49800,
+      price: 42800,
+      spec: "10kg",
+      //badge: "한정",
+      //badgeType: "limit",
       review: null,
       unit: "원",
-      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
-      alt: "CJ 햇반"
+      img: "resource/grocery/superoning.jpg",
+      alt: "슈퍼오닝"
     },
     {
-      name: "CJ 햇반 박스",
-      oldPrice: 18000,
-      price: 13900,
-      spec: "12개입/박스",
-      badge: "한정",
-      badgeType: "limit",
+      name: "풀무원 피자 2종",
+      oldPrice: 4980,
+      price: 2980,
+      spec: "1박스",
+      /*badge: "한정",
+      badgeType: "limit",*/
       review: null,
       unit: "원",
-      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
-      alt: "CJ 햇반"
+      img: "resource/grocery/nangdong/pulpizza.jpg",
+      alt: "풀무원 피자"
     },
     {
-      name: "CJ 햇반 박스",
-      oldPrice: 18000,
-      price: 13900,
-      spec: "12개입/박스",
-      badge: "한정",
-      badgeType: "limit",
+      name: "오뚜기 옛날참기름",
+      oldPrice: 9800,
+      price: 6980,
+      spec: "450ml",
+      /*badge: "한정",
+      badgeType: "limit",*/
       review: null,
       unit: "원",
-      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
-      alt: "CJ 햇반"
+      img: "resource/grocery/condiment/sesameoil.jpg",
+      alt: "오뚜기 옛날참기름"
     },
     {
-      name: "CJ 햇반 박스",
-      oldPrice: 18000,
-      price: 13900,
-      spec: "12개입/박스",
-      badge: "한정",
-      badgeType: "limit",
+      name: "백설 콩식용유",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "1.8L",
+      /*badge: "한정",
+      badgeType: "limit",*/
       review: null,
       unit: "원",
-      img: "https://okmart.ca/cdn/shop/products/images_34b308bd-d24b-49d0-af5d-79e1c0ecaf19_580x.jpg?v=1664394105",
-      alt: "CJ 햇반"
+      img: "resource/grocery/condiment/beanoil.jpg",
+      alt: "백설 콩식용유"
+    },
+    {
+      name: "샘표 진간장 금F3",
+      oldPrice: 9800,
+      price: 8900,
+      spec: "1.7+500ml",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/condiment/realsoysoucegoldf3.jpg",
+      alt: "샘표 진간장 금F3"
+    },
+    {
+      name: "샘표 진간장 S",
+      oldPrice: 6980,
+      price: 4980,
+      spec: "1.7L",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/condiment/realsoysouces.jpg",
+      alt: "샘표 진간장 S"
+    },
+    {
+      name: "삼립 베리굿 딸기쨈",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "480g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/condiment/verrygoodstrawberryjam.jpg",
+      alt: "삼립 베리굿 딸기쨈"
+    },
+    {
+      name: "리고 땅콩버터 청키",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "462g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/condiment/ligopeanutbutterchunky.jpg",
+      alt: "리고 땅콩버터 청키"
+    },
+    {
+      name: "오뚜기 앙버터쨈/딸기버터쨈",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "280g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/condiment/butterjam.jpg",
+      alt: "오뚜기 앙버터쨈/딸기버터쨈"
+    },
+    {
+      name: "유동 번데기탕",
+      oldPrice: 9800,
+      price: 8900,
+      spec: "280g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/can/bundaegitang.jpg",
+      alt: "유동 번데기탕"
+    },
+    {
+      name: "유동 골뱅이",
+      oldPrice: 6980,
+      price: 4980,
+      spec: "300g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/can/wildseasnail.jpg",
+      alt: "유동 골뱅이"
+    },
+    {
+      name: "오레오 오즈",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "500g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/oreoos.jpg",
+      alt: "오레오 오즈"
+    },
+    {
+      name: "포스트 오곡코코볼",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "300g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/cocoball.jpg",
+      alt: "포스트 오곡코코볼"
+    },
+    {
+      name: "포스트 크리치오",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "300g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/crishyo.jpg",
+      alt: "포스트 크리치오"
+    },
+    {
+      name: "미왕 바나나맛쌀과자",
+      oldPrice: 9800,
+      price: 8900,
+      spec: "206g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/bananamawiang.jpg",
+      alt: "미왕 바나나맛쌀과자"
+    },
+    {
+      name: "미왕 쌀과자",
+      oldPrice: 6980,
+      price: 4980,
+      spec: "250g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/miwaingorigin.jpg",
+      alt: "미왕 쌀과자"
+    },
+    {
+      name: "오리온 카스타드",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "12입",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/orioncastard.jpg",
+      alt: "오리온 카스타드"
+    },
+    {
+      name: "오리온 초코칩쿠키 2번들",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "2번들",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/onrionchocochip.jpg",
+      alt: "오리온 초코칩쿠키 2번들"
+    },
+    {
+      name: "오리온 고소미",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "16p",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/snac/gosomi.jpg",
+      alt: "오리온 고소미"
+    },
+    {
+      name: "해태 홈런볼",
+      oldPrice: 9800,
+      price: 8900,
+      spec: "4입/번들",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/snac/homerunball.jpg",
+      alt: "해태 홈런볼"
+    },
+    {
+      name: "롯데 카스타드",
+      oldPrice: 6980,
+      price: 4980,
+      spec: "230g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/condiment/realsoysouces.jpg",
+      alt: "롯데 카스타드"
+    },
+    {
+      name: "롯데 마가렛트",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "352g",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/snac/lottecastard.jpg",
+      alt: "롯데 마가렛트"
+    },
+    {
+      name: "삼양 짜짜로니",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "5입/멀티",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/ramen/jajaloni.jpg",
+      alt: "삼양 짜짜로니"
+    },
+    {
+      name: "농심 신라면툼바",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "4입/멀티",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/ramen/sniramentoomba.jpg",
+      alt: "농심 신라면툼바"
+    },
+    {
+      name: "배홍동 막국수",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "4입/멀티",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/cramen/bahongdongmakgooksu.jpg",
+      alt: "배홍동 막국수"
+    },
+    {
+      name: "삼양 1963",
+      oldPrice: 7980,
+      price: 5980,
+      spec: "4입/멀티",
+      /*badge: "한정",
+      badgeType: "limit",*/
+      review: null,
+      unit: "원",
+      img: "resource/grocery/ramen/1963.jpg",
+      alt: "삼양 1963"
     },
   ]
 };
