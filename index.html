@@ -258,6 +258,7 @@
             aspect-ratio: 1 / 1;   /* 정사각형 틀 */
             overflow: hidden;
             background: #f9f9f9;
+            position: relative;
         }
         .grocery-img-wrap img {
             width: 100%;
@@ -346,7 +347,7 @@
             <div class="tab-nav">
                 <button class="active" onclick="scrollToSection('banner-top', this)">전체상품</button>
                 <button onclick="scrollToSection('banner-meat', this)">정육코너</button>
-                <button onclick="scrollToSection('banner-fruit', this)">과일코너</button>
+                
                 <button onclick="scrollToSection('banner-grocery', this)">공산코너</button>
             </div>
         </div>
@@ -357,9 +358,7 @@
 
             <div id="banner-meat" class="section-banner">🥩 정육코너 특가</div>
             <div id="meat-section" class="product-grid"></div>
-
-            <div id="banner-fruit" class="section-banner">🍇 과일코너 특가</div>
-            <div id="fruit-section" class="product-grid"></div>
+            
 
             <div id="banner-grocery" class="section-banner">🛒 공산코너 특가</div>
             <div id="grocery-section" class="grocery-grid"></div>
@@ -370,6 +369,11 @@
     <button class="btn-top" onclick="scrollToSection('banner-top')">▲ TOP</button>
 
 <script>
+
+/*    위, 정육~공산 사이에 집어넣기 
+            <button onclick="scrollToSection('banner-fruit', this)">과일코너</button>
+            <div id="banner-fruit" class="section-banner">🍇 과일코너 특가</div>
+            <div id="fruit-section" class="product-grid"></div>*/  
 // 1) 상품 데이터 - 여기만 수정하면 됨
 const PRODUCTS = {
   top: [
@@ -386,7 +390,7 @@ const PRODUCTS = {
       alt: "산지직송 성주 꿀참외"
     },
     /*{
-      name: "신라면",
+      name: "시금치",
       oldPrice: 4800,
       spec: "5입/멀티",
       price: 3480,
@@ -394,15 +398,15 @@ const PRODUCTS = {
       badgeType: "limit",
       review: null,
       unit: "원",
-      img: "resource/grocery/shinramyun.jpg",
+      img: "resource/veg/sna.jpg",
       alt: "신라면"
     },*/
     {
       name: "산지직송 안동 부사",
       badge: "인기상품",
-      oldPrice: 15000,
-      price: 9800,
-      spec: "6개/봉",
+      oldPrice: 35000,
+      price: 27800,
+      spec: "10개/봉",
       badgeType: "new",
       review: null,
       unit: "원",
@@ -415,7 +419,7 @@ const PRODUCTS = {
       name: "한돈 앞다리살",
       oldPrice: 9800,
       spec: "600g/근",
-      price: 6980,
+      price: 7280,
       badge: "4월특가세일",
       badgeType: "limit",
       review: null,
@@ -435,7 +439,7 @@ const PRODUCTS = {
       img: "resource/meat/gukgeori.jpg",
       alt: "한우 국거리"
     },
-    {
+  /*{
       name: "냉동 돼지갈비",
       oldPrice: 1500,
       spec: "100g",
@@ -447,7 +451,7 @@ const PRODUCTS = {
       img: "resource/meat/ppyeojjim.jpg",
       alt: "냉동 돼지갈비"
     },
-    /*{
+    {
       name: "국내산 생삼겹살4 (600g)",
       oldPrice: 22000,
       price: 14500,
@@ -514,7 +518,7 @@ const PRODUCTS = {
       alt: "국내산 생삼겹살"
     }*/
   ],
-  fruit: [
+  /*fruit: [
     {
       name: "샤인머스캣(냉장)",
       oldPrice: 25000,
@@ -548,17 +552,6 @@ const PRODUCTS = {
       img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
       alt: "샤인머스캣"
     },
-    /*{
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
     {
       name: "샤인머스캣(냉장)",
       oldPrice: 25000,
@@ -613,8 +606,19 @@ const PRODUCTS = {
       unit: "원/100g",
       img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
       alt: "샤인머스캣"
-    }*/
-  ],
+    },
+    {
+      name: "샤인머스캣(냉장)",
+      oldPrice: 25000,
+      price: 19800,
+      badge: null,
+      badgeType: null,
+      review: null,
+      unit: "원/100g",
+      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
+      alt: "샤인머스캣"
+    }
+  ],*/
 
   grocery: [   
     {
@@ -1136,7 +1140,7 @@ function createGroceryCard(p) {
 function renderAll() {
   document.getElementById("top-section").innerHTML   = PRODUCTS.top.map(createCard).join("");
   document.getElementById("meat-section").innerHTML  = PRODUCTS.meat.map(createCard).join("");
-  document.getElementById("fruit-section").innerHTML = PRODUCTS.fruit.map(createCard).join("");
+  //document.getElementById("fruit-section").innerHTML = PRODUCTS.fruit.map(createCard).join("");
   document.getElementById("grocery-section").innerHTML = PRODUCTS.grocery.map(createGroceryCard).join("");
   initScrollFade();
 }
