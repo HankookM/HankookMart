@@ -87,11 +87,11 @@
       "layout": "grid",
       "products": [
         {
-          "name": "신라면 툼바",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/ramen/sniramentoomba.jpg?raw=true",
-          "price": "4,980",
-          "old_price": "5500",
-          "unit": "4입/멀티"
+          "name": "슈퍼오닝",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/superoning.jpg?raw=true",
+          "price": "44,800",
+          "old_price": "59,800",
+          "unit": "10kg"
         }
       ]
     },
