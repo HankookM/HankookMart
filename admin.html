@@ -84,7 +84,6 @@ button:hover { opacity: 0.85; }
 }
 .section-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 8px;
     margin-bottom: 10px;
@@ -126,6 +125,86 @@ button:hover { opacity: 0.85; }
     margin-top: 6px;
 }
 .product-card .pactions button { flex: 1; }
+
+/* 드래그 앤 드롭 */
+.product-card {
+    cursor: grab;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.product-card:active { cursor: grabbing; }
+.product-card.dragging {
+    opacity: 0.4;
+    transform: scale(0.95);
+}
+.product-card.drag-over {
+    box-shadow: 0 0 0 3px var(--primary);
+    transform: scale(1.02);
+}
+.section-block {
+    transition: box-shadow 0.15s, transform 0.15s, opacity 0.15s;
+}
+.section-block.dragging {
+    opacity: 0.4;
+}
+.section-block.drag-over-section {
+    box-shadow: 0 0 0 3px var(--primary);
+}
+.drag-handle {
+    cursor: grab;
+    color: #999;
+    font-size: 18px;
+    padding: 4px 8px;
+    user-select: none;
+}
+.drag-handle:hover { color: var(--primary); }
+.drag-handle:active { cursor: grabbing; }
+
+/* 레이아웃 선택 아이콘 */
+.layout-picker {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+.layout-option {
+    flex: 1;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 8px;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+}
+.layout-option:hover { border-color: #ffb74d; background: #fff8e1; }
+.layout-option.selected {
+    border-color: var(--primary);
+    background: #ffebee;
+}
+.layout-option .layout-icon {
+    display: grid;
+    gap: 3px;
+    margin: 0 auto 6px;
+    width: 50px;
+    height: 36px;
+}
+.layout-option .layout-icon span {
+    background: #d32f2f;
+    border-radius: 2px;
+}
+.layout-option.list-icon .layout-icon {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.layout-option.grid-icon .layout-icon {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+}
+.layout-option .layout-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+.layout-option.selected .layout-label { color: var(--primary); }
 
 /* 모달 */
 .modal-bg {
@@ -295,6 +374,9 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
     <!-- 코너(섹션) 목록 -->
     <div class="card">
         <h2>📦 코너 / 상품 관리</h2>
+        <div class="help-text" style="margin-bottom: 12px;">
+            💡 상품 카드나 코너 제목의 <strong>☰</strong> 핸들을 드래그해서 순서를 바꿀 수 있습니다. 상품은 다른 코너로도 옮길 수 있어요.
+        </div>
         <div id="sections-container"></div>
         <div class="actions">
             <button class="btn-secondary" onclick="addSection()">+ 코너 추가</button>
@@ -315,6 +397,42 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
         </div>
         <div class="help-text" style="margin-top: 8px;">
             저장 시 GitHub 저장소의 products.json 파일이 갱신됩니다. GitHub Pages 사용 시 1~2분 후 사이트에 반영됩니다.
+        </div>
+    </div>
+</div>
+
+<!-- 코너 편집 모달 -->
+<div class="modal-bg" id="section-modal" onclick="if(event.target===this)closeSectionModal()">
+    <div class="modal">
+        <h3 id="section-modal-title">코너 추가</h3>
+        <div class="field">
+            <label>코너 제목 *</label>
+            <input type="text" id="s-title" placeholder="예: 🥩 정육코너 특가">
+        </div>
+        <div class="field">
+            <label>탭 이름 (짧게)</label>
+            <input type="text" id="s-tab" placeholder="예: 정육코너">
+        </div>
+        <div class="field">
+            <label>영문 ID (URL용, 자동 생성가능)</label>
+            <input type="text" id="s-id" placeholder="예: meat">
+        </div>
+        <div class="field">
+            <label>레이아웃</label>
+            <div class="layout-picker">
+                <div class="layout-option list-icon" data-layout="list" onclick="selectLayout('list')">
+                    <div class="layout-icon"><span></span><span></span><span></span></div>
+                    <div class="layout-label">1열 리스트</div>
+                </div>
+                <div class="layout-option grid-icon" data-layout="grid" onclick="selectLayout('grid')">
+                    <div class="layout-icon"><span></span><span></span><span></span></div>
+                    <div class="layout-label">3열 그리드</div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="btn-primary" onclick="saveSection()">저장</button>
+            <button class="btn-secondary" onclick="closeSectionModal()">취소</button>
         </div>
     </div>
 </div>
@@ -385,6 +503,8 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
 
 let DATA = { store: {}, sections: [] };
 let editing = { sectionIndex: null, productIndex: null };
+let sectionEditing = { index: null, layout: 'list' };
+let dragState = { type: null, fromSection: null, fromIndex: null, sectionIndex: null };
 
 const STORAGE_KEY = 'jmart_admin_config';
 const DATA_CACHE_KEY = 'jmart_admin_data';
@@ -579,44 +699,180 @@ function renderSections() {
     (DATA.sections || []).forEach((section, sIdx) => {
         const div = document.createElement('div');
         div.className = 'section-block';
+        div.draggable = true;
+        div.dataset.sectionIndex = sIdx;
         div.innerHTML = `
             <div class="section-header">
+                <span class="drag-handle" title="드래그해서 순서 변경">☰</span>
                 <strong>${escapeHtml(section.title || '제목없음')}</strong>
-                <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                    <button class="btn-secondary btn-small" onclick="moveSection(${sIdx},-1)">↑</button>
-                    <button class="btn-secondary btn-small" onclick="moveSection(${sIdx},1)">↓</button>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-left:auto;">
                     <button class="btn-secondary btn-small" onclick="editSection(${sIdx})">✏️ 코너 정보</button>
                     <button class="btn-primary btn-small" onclick="addProduct(${sIdx})">+ 상품 추가</button>
                     <button class="btn-danger btn-small" onclick="removeSection(${sIdx})">코너 삭제</button>
                 </div>
             </div>
-            <div class="product-list">
+            <div class="product-list" data-section-index="${sIdx}">
                 ${(section.products || []).map((p, pIdx) => productCardHtml(p, sIdx, pIdx)).join('') ||
                   '<div style="grid-column:1/-1; color:#999; text-align:center; padding:20px;">상품이 없습니다. [상품 추가]를 눌러주세요.</div>'}
             </div>
         `;
         container.appendChild(div);
     });
+    attachDragHandlers();
 }
 
 function productCardHtml(p, sIdx, pIdx) {
     const badge = p.badge && p.badge.text ? `<span class="pbadge">${escapeHtml(p.badge.text)}</span>` : '';
     const oldPrice = p.old_price ? `<div class="pold">${escapeHtml(p.old_price)}</div>` : '';
     return `
-        <div class="product-card">
+        <div class="product-card" draggable="true" data-section="${sIdx}" data-index="${pIdx}" title="드래그해서 순서 변경">
             <img src="${escapeHtml(p.image)}" onerror="this.style.background='#fcc'" alt="">
             ${badge}
             <div class="pname">${escapeHtml(p.name)}</div>
             ${oldPrice}
             <div class="pprice">${escapeHtml(p.price)}${p.unit ? escapeHtml(p.unit) : ''}</div>
             <div class="pactions">
-                <button class="btn-secondary btn-small" onclick="moveProduct(${sIdx},${pIdx},-1)">↑</button>
-                <button class="btn-secondary btn-small" onclick="moveProduct(${sIdx},${pIdx},1)">↓</button>
                 <button class="btn-primary btn-small" onclick="editProduct(${sIdx},${pIdx})">수정</button>
                 <button class="btn-danger btn-small" onclick="removeProduct(${sIdx},${pIdx})">삭제</button>
             </div>
         </div>
     `;
+}
+
+// ---- 드래그 앤 드롭 ----
+function attachDragHandlers() {
+    // 상품 카드
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('dragstart', onProductDragStart);
+        card.addEventListener('dragend', onProductDragEnd);
+        card.addEventListener('dragover', onProductDragOver);
+        card.addEventListener('dragleave', onProductDragLeave);
+        card.addEventListener('drop', onProductDrop);
+    });
+    // 코너 블록
+    document.querySelectorAll('.section-block').forEach(block => {
+        block.addEventListener('dragstart', onSectionDragStart);
+        block.addEventListener('dragend', onSectionDragEnd);
+        block.addEventListener('dragover', onSectionDragOver);
+        block.addEventListener('dragleave', onSectionDragLeave);
+        block.addEventListener('drop', onSectionDrop);
+    });
+    // 상품 리스트 영역 (빈 영역에도 드롭 가능)
+    document.querySelectorAll('.product-list').forEach(list => {
+        list.addEventListener('dragover', onListDragOver);
+        list.addEventListener('drop', onListDrop);
+    });
+}
+
+function onProductDragStart(e) {
+    e.stopPropagation();
+    const card = e.currentTarget;
+    dragState = {
+        type: 'product',
+        fromSection: parseInt(card.dataset.section),
+        fromIndex: parseInt(card.dataset.index)
+    };
+    card.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', 'product'); } catch (err) {}
+}
+function onProductDragEnd(e) {
+    e.currentTarget.classList.remove('dragging');
+    document.querySelectorAll('.product-card.drag-over').forEach(el => el.classList.remove('drag-over'));
+    dragState = { type: null };
+}
+function onProductDragOver(e) {
+    if (dragState.type !== 'product') return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'move';
+    const card = e.currentTarget;
+    if (!card.classList.contains('dragging')) card.classList.add('drag-over');
+}
+function onProductDragLeave(e) {
+    e.currentTarget.classList.remove('drag-over');
+}
+function onProductDrop(e) {
+    if (dragState.type !== 'product') return;
+    e.preventDefault();
+    e.stopPropagation();
+    const target = e.currentTarget;
+    target.classList.remove('drag-over');
+    const toSection = parseInt(target.dataset.section);
+    const toIndex = parseInt(target.dataset.index);
+    moveProductTo(dragState.fromSection, dragState.fromIndex, toSection, toIndex);
+}
+function onListDragOver(e) {
+    if (dragState.type !== 'product') return;
+    // 상품 카드 위에 있으면 카드 핸들러가 처리하도록 그대로 둔다
+    if (e.target.closest('.product-card')) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+}
+function onListDrop(e) {
+    if (dragState.type !== 'product') return;
+    if (e.target.closest('.product-card')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const list = e.currentTarget;
+    const toSection = parseInt(list.dataset.sectionIndex);
+    // 이 코너의 마지막으로 이동
+    const toIndex = (DATA.sections[toSection].products || []).length;
+    moveProductTo(dragState.fromSection, dragState.fromIndex, toSection, toIndex);
+}
+
+function moveProductTo(fromS, fromI, toS, toI) {
+    if (fromS === toS && fromI === toI) return;
+    const fromArr = DATA.sections[fromS].products;
+    const [p] = fromArr.splice(fromI, 1);
+    const toArr = DATA.sections[toS].products = DATA.sections[toS].products || [];
+    let insertAt = toI;
+    // 같은 코너에서 앞으로 이동 시 인덱스 보정
+    if (fromS === toS && fromI < toI) insertAt = toI - 1;
+    if (insertAt > toArr.length) insertAt = toArr.length;
+    toArr.splice(insertAt, 0, p);
+    renderSections();
+}
+
+// 코너 드래그
+function onSectionDragStart(e) {
+    // 상품 드래그 중이면 코너 드래그는 무시
+    if (e.target.closest('.product-card')) { e.preventDefault(); return; }
+    const block = e.currentTarget;
+    dragState = {
+        type: 'section',
+        sectionIndex: parseInt(block.dataset.sectionIndex)
+    };
+    block.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', 'section'); } catch (err) {}
+}
+function onSectionDragEnd(e) {
+    e.currentTarget.classList.remove('dragging');
+    document.querySelectorAll('.section-block.drag-over-section').forEach(el => el.classList.remove('drag-over-section'));
+    dragState = { type: null };
+}
+function onSectionDragOver(e) {
+    if (dragState.type !== 'section') return;
+    e.preventDefault();
+    const block = e.currentTarget;
+    if (!block.classList.contains('dragging')) block.classList.add('drag-over-section');
+}
+function onSectionDragLeave(e) {
+    e.currentTarget.classList.remove('drag-over-section');
+}
+function onSectionDrop(e) {
+    if (dragState.type !== 'section') return;
+    e.preventDefault();
+    const block = e.currentTarget;
+    block.classList.remove('drag-over-section');
+    const fromI = dragState.sectionIndex;
+    const toI = parseInt(block.dataset.sectionIndex);
+    if (fromI === toI) return;
+    const arr = DATA.sections;
+    const [s] = arr.splice(fromI, 1);
+    arr.splice(toI, 0, s);
+    renderSections();
 }
 
 function escapeHtml(s) {
@@ -628,40 +884,60 @@ function escapeHtml(s) {
 
 // ---- 코너 관리 ----
 function addSection() {
-    const title = prompt('코너 제목 (예: 🥩 정육코너 특가)');
-    if (!title) return;
-    const tab = prompt('탭 이름 (짧게, 예: 정육코너)', title);
-    const id = prompt('영문 ID (URL용, 예: meat)', 'sec' + Date.now());
-    const layout = confirm('3열 그리드로 배치할까요?\n[확인] = 그리드 (정육/과일처럼)\n[취소] = 1행 리스트') ? 'grid' : 'list';
-    DATA.sections = DATA.sections || [];
-    DATA.sections.push({ id, title, tab_label: tab, layout, products: [] });
-    renderSections();
+    sectionEditing = { index: null, layout: 'list' };
+    document.getElementById('section-modal-title').textContent = '코너 추가';
+    document.getElementById('s-title').value = '';
+    document.getElementById('s-tab').value = '';
+    document.getElementById('s-id').value = '';
+    selectLayout('list');
+    document.getElementById('section-modal').classList.add('show');
 }
 
 function editSection(idx) {
     const s = DATA.sections[idx];
-    const title = prompt('코너 제목', s.title);
-    if (title === null) return;
-    const tab = prompt('탭 이름', s.tab_label || s.title);
-    if (tab === null) return;
-    const id = prompt('영문 ID', s.id);
-    if (id === null) return;
-    const layout = confirm('3열 그리드로 배치? (취소=리스트)') ? 'grid' : 'list';
-    Object.assign(s, { title, tab_label: tab, id, layout });
+    sectionEditing = { index: idx, layout: s.layout || 'list' };
+    document.getElementById('section-modal-title').textContent = '코너 수정';
+    document.getElementById('s-title').value = s.title || '';
+    document.getElementById('s-tab').value = s.tab_label || '';
+    document.getElementById('s-id').value = s.id || '';
+    selectLayout(s.layout || 'list');
+    document.getElementById('section-modal').classList.add('show');
+}
+
+function selectLayout(layout) {
+    sectionEditing.layout = layout;
+    document.querySelectorAll('.layout-option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.layout === layout);
+    });
+}
+
+function closeSectionModal() {
+    document.getElementById('section-modal').classList.remove('show');
+}
+
+function saveSection() {
+    const title = document.getElementById('s-title').value.trim();
+    const tab = document.getElementById('s-tab').value.trim();
+    let id = document.getElementById('s-id').value.trim();
+    const layout = sectionEditing.layout || 'list';
+    if (!title) { toast('코너 제목은 필수입니다', 'error'); return; }
+    if (!id) id = 'sec' + Date.now();
+    const data = { id, title, tab_label: tab || title, layout };
+
+    if (sectionEditing.index === null) {
+        DATA.sections = DATA.sections || [];
+        DATA.sections.push({ ...data, products: [] });
+    } else {
+        Object.assign(DATA.sections[sectionEditing.index], data);
+    }
+    closeSectionModal();
     renderSections();
+    toast('코너 저장됨 (아직 GitHub에는 미반영)', 'info');
 }
 
 function removeSection(idx) {
     if (!confirm('이 코너를 삭제할까요? 안의 상품도 모두 삭제됩니다.')) return;
     DATA.sections.splice(idx, 1);
-    renderSections();
-}
-
-function moveSection(idx, dir) {
-    const arr = DATA.sections;
-    const ni = idx + dir;
-    if (ni < 0 || ni >= arr.length) return;
-    [arr[idx], arr[ni]] = [arr[ni], arr[idx]];
     renderSections();
 }
 
@@ -683,14 +959,6 @@ function editProduct(sIdx, pIdx) {
 function removeProduct(sIdx, pIdx) {
     if (!confirm('상품을 삭제할까요?')) return;
     DATA.sections[sIdx].products.splice(pIdx, 1);
-    renderSections();
-}
-
-function moveProduct(sIdx, pIdx, dir) {
-    const arr = DATA.sections[sIdx].products;
-    const ni = pIdx + dir;
-    if (ni < 0 || ni >= arr.length) return;
-    [arr[pIdx], arr[ni]] = [arr[ni], arr[pIdx]];
     renderSections();
 }
 
