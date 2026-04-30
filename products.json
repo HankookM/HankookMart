@@ -2,7 +2,7 @@
   "store": {
     "name": "비전마트 한국점",
     "title": "💥 주말 미친 세일 💥",
-    "subtitle": "1월 28일 단 하루! 선착순 판매",
+    "subtitle": "현제 이 페이지는 테스트 페이지 입니다.",
     "period": "1/1(수) ~ 1/31(금)",
     "phone": "02-1234-5678",
     "footer_note": "※ 조기 품절될 수 있습니다."
@@ -87,7 +87,7 @@
       "layout": "grid",
       "products": [
         {
-          "name": "신라면",
+          "name": "신라면 툼바",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/ramen/sniramentoomba.jpg?raw=true",
           "price": "4,980",
           "old_price": "5500",
