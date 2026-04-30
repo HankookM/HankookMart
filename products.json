@@ -85,7 +85,15 @@
       "title": "공산코너",
       "tab_label": "공산코너",
       "layout": "grid",
-      "products": []
+      "products": [
+        {
+          "name": "신라면",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/ramen/sniramentoomba.jpg?raw=true",
+          "price": "4,980",
+          "old_price": "5500",
+          "unit": "4입/멀티"
+        }
+      ]
     },
     {
       "id": "fruit",
