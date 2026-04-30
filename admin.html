@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전단지 관리자</title>
+<style>
+:root {
+    --primary: #d32f2f;
+    --primary-dark: #b71c1c;
+    --bg: #f5f5f5;
+    --card: #ffffff;
+    --border: #e0e0e0;
+    --text: #333;
+    --muted: #888;
+    --success: #43a047;
+    --warning: #fb8c00;
+}
+* { box-sizing: border-box; }
+body {
+    font-family: '맑은 고딕', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+}
+.wrap { max-width: 1100px; margin: 0 auto; }
+h1 { color: var(--primary); margin: 0 0 4px; }
+.subtitle { color: var(--muted); margin-bottom: 20px; font-size: 14px; }
+
+.card {
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.card h2 { margin: 0 0 16px; font-size: 18px; border-bottom: 2px solid var(--primary); padding-bottom: 8px; }
+.card h3 { margin: 16px 0 10px; font-size: 15px; color: #555; }
+
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.row > * { flex: 1; min-width: 200px; }
+
+label { display: block; font-size: 13px; color: #555; margin-bottom: 4px; font-weight: 600; }
+input[type=text], input[type=password], textarea, select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+}
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+textarea { resize: vertical; min-height: 60px; }
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.15s;
+}
+button:hover { opacity: 0.85; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-secondary { background: #e0e0e0; color: #333; }
+.btn-success { background: var(--success); color: #fff; }
+.btn-warning { background: var(--warning); color: #fff; }
+.btn-danger { background: #757575; color: #fff; padding: 4px 8px; font-size: 12px; }
+.btn-small { padding: 4px 10px; font-size: 12px; }
+
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+
+.section-block {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 14px;
+    background: #fafafa;
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.section-header strong { font-size: 16px; color: var(--primary); }
+
+.product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.product-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    background: #fff;
+    position: relative;
+    font-size: 13px;
+}
+.product-card img {
+    width: 100%; height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid #ff5252;
+    margin-bottom: 6px;
+    background: #eee;
+}
+.product-card .pname { font-weight: bold; font-size: 14px; margin-bottom: 2px; }
+.product-card .pprice { color: var(--primary); font-weight: bold; }
+.product-card .pold { text-decoration: line-through; color: #999; font-size: 12px; }
+.product-card .pbadge {
+    display: inline-block;
+    padding: 1px 5px;
+    background: #e53935;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+.product-card .pactions {
+    display: flex; gap: 4px;
+    margin-top: 6px;
+}
+.product-card .pactions button { flex: 1; }
+
+/* 모달 */
+.modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+    padding: 20px;
+    overflow-y: auto;
+}
+.modal-bg.show { display: flex; align-items: flex-start; justify-content: center; }
+.modal {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    width: 100%;
+    max-width: 500px;
+    margin: 40px 0;
+}
+.modal h3 { margin-top: 0; color: var(--primary); }
+
+.field { margin-bottom: 12px; }
+
+/* 토스트 */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 200;
+    display: none;
+}
+.toast.show { display: block; animation: slideIn 0.3s ease; }
+.toast.success { background: var(--success); }
+.toast.error { background: var(--primary); }
+.toast.info { background: #1976d2; }
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.status-bar {
+    background: #fff3e0;
+    border-left: 4px solid var(--warning);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+.status-bar.connected {
+    background: #e8f5e9;
+    border-left-color: var(--success);
+}
+
+.preview-link {
+    display: inline-block;
+    margin-left: 8px;
+    color: #1976d2;
+    text-decoration: none;
+    font-size: 13px;
+}
+.preview-link:hover { text-decoration: underline; }
+
+details { margin-bottom: 12px; }
+summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
+
+.help-text {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+    <h1>📋 한국마트 전단지 관리자</h1>
+    <div class="subtitle">상품을 추가/수정한 뒤 [GitHub에 저장]을 누르면 전단지 페이지에 즉시 반영됩니다.</div>
+
+    <!-- 상태 표시 -->
+    <div id="status-bar" class="status-bar">
+        ⚠️ 먼저 아래 [GitHub 연결 설정]에서 토큰을 등록해주세요.
+    </div>
+
+    <!-- GitHub 연결 설정 -->
+    <div class="card">
+        <details id="github-config">
+            <summary>🔧 GitHub 연결 설정</summary>
+            <div style="margin-top: 12px;">
+                <div class="row">
+                    <div>
+                        <label>GitHub 사용자명</label>
+                        <input type="text" id="gh-owner" placeholder="예: gang7369-lgtm">
+                    </div>
+                    <div>
+                        <label>저장소 이름</label>
+                        <input type="text" id="gh-repo" placeholder="예: jmart">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div>
+                        <label>브랜치</label>
+                        <input type="text" id="gh-branch" value="main" placeholder="main">
+                    </div>
+                    <div>
+                        <label>products.json 경로</label>
+                        <input type="text" id="gh-path" value="products.json" placeholder="products.json">
+                    </div>
+                </div>
+                <div class="field" style="margin-top: 10px;">
+                    <label>Personal Access Token (PAT)</label>
+                    <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxx">
+                    <div class="help-text">
+                        토큰은 브라우저 로컬에만 저장되며 외부로 전송되지 않습니다 (GitHub API 호출 시에만 사용).
+                        <a href="https://github.com/settings/tokens/new?scopes=repo&description=jmart-flyer-admin" target="_blank">토큰 발급하기 →</a>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="btn-primary" onclick="saveGithubConfig()">설정 저장</button>
+                    <button class="btn-secondary" onclick="testConnection()">연결 테스트</button>
+                    <button class="btn-warning" onclick="loadFromGithub()">GitHub에서 데이터 불러오기</button>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- 매장/행사 정보 -->
+    <div class="card">
+        <h2>매장/행사 정보</h2>
+        <div class="row">
+            <div>
+                <label>매장명</label>
+                <input type="text" id="store-name">
+            </div>
+            <div>
+                <label>전단지 제목 (헤더 큰 글씨)</label>
+                <input type="text" id="store-title">
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <div>
+                <label>부제목 (헤더 작은 글씨)</label>
+                <input type="text" id="store-subtitle">
+            </div>
+            <div>
+                <label>행사기간</label>
+                <input type="text" id="store-period">
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <div>
+                <label>문의전화</label>
+                <input type="text" id="store-phone">
+            </div>
+            <div>
+                <label>하단 문구</label>
+                <input type="text" id="store-footer">
+            </div>
+        </div>
+    </div>
+
+    <!-- 코너(섹션) 목록 -->
+    <div class="card">
+        <h2>📦 코너 / 상품 관리</h2>
+        <div id="sections-container"></div>
+        <div class="actions">
+            <button class="btn-secondary" onclick="addSection()">+ 코너 추가</button>
+        </div>
+    </div>
+
+    <!-- 저장/배포 -->
+    <div class="card">
+        <h2>💾 저장 및 배포</h2>
+        <div class="actions">
+            <button class="btn-success" onclick="saveToGithub()" style="font-size: 16px; padding: 12px 24px;">
+                🚀 GitHub에 저장 (즉시 배포)
+            </button>
+            <button class="btn-secondary" onclick="exportJson()">JSON 다운로드</button>
+            <button class="btn-secondary" onclick="document.getElementById('json-import').click()">JSON 가져오기</button>
+            <input type="file" id="json-import" accept=".json" style="display:none" onchange="importJson(event)">
+            <a id="preview-link" class="preview-link" href="index.html" target="_blank">전단지 미리보기 →</a>
+        </div>
+        <div class="help-text" style="margin-top: 8px;">
+            저장 시 GitHub 저장소의 products.json 파일이 갱신됩니다. GitHub Pages 사용 시 1~2분 후 사이트에 반영됩니다.
+        </div>
+    </div>
+</div>
+
+<!-- 상품 편집 모달 -->
+<div class="modal-bg" id="product-modal" onclick="if(event.target===this)closeProductModal()">
+    <div class="modal">
+        <h3 id="product-modal-title">상품 추가</h3>
+        <div class="field">
+            <label>상품명 *</label>
+            <input type="text" id="p-name">
+        </div>
+        <div class="field">
+            <label>이미지 URL *</label>
+            <input type="text" id="p-image" oninput="updateImagePreview()">
+            <img id="p-image-preview" style="width:100%; max-height:140px; object-fit:cover; margin-top:6px; border-radius:4px; display:none;">
+        </div>
+        <div class="row">
+            <div class="field">
+                <label>원래 가격 (취소선)</label>
+                <input type="text" id="p-old-price" placeholder="예: 22,000원">
+            </div>
+            <div class="field">
+                <label>판매 가격 *</label>
+                <input type="text" id="p-price" placeholder="예: 14,500원">
+            </div>
+        </div>
+        <div class="field">
+            <label>가격 단위 (선택)</label>
+            <input type="text" id="p-unit" placeholder="예: 원/100g">
+        </div>
+        <h3 style="margin-top:20px; font-size:14px;">뱃지 (선택)</h3>
+        <div class="field">
+            <label>뱃지 텍스트</label>
+            <input type="text" id="p-badge-text" placeholder="비워두면 뱃지 없음">
+        </div>
+        <div class="row">
+            <div class="field">
+                <label>뱃지 종류</label>
+                <select id="p-badge-type">
+                    <option value="limit">한정 (빨강)</option>
+                    <option value="new">NEW (초록)</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>뱃지 애니메이션</label>
+                <select id="p-badge-anim">
+                    <option value="">없음</option>
+                    <option value="blink">깜빡임</option>
+                    <option value="pulse">펄스</option>
+                </select>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="btn-primary" onclick="saveProduct()">저장</button>
+            <button class="btn-secondary" onclick="closeProductModal()">취소</button>
+        </div>
+    </div>
+</div>
+
+<!-- 토스트 -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// 전단지 관리자 - 핵심 로직
+// ============================================================
+
+let DATA = { store: {}, sections: [] };
+let editing = { sectionIndex: null, productIndex: null };
+
+const STORAGE_KEY = 'jmart_admin_config';
+const DATA_CACHE_KEY = 'jmart_admin_data';
+
+// ---- 토스트 ----
+function toast(msg, type = 'info') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + type;
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ---- GitHub 설정 ----
+function saveGithubConfig() {
+    const cfg = {
+        owner: document.getElementById('gh-owner').value.trim(),
+        repo: document.getElementById('gh-repo').value.trim(),
+        branch: document.getElementById('gh-branch').value.trim() || 'main',
+        path: document.getElementById('gh-path').value.trim() || 'products.json',
+        token: document.getElementById('gh-token').value.trim()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+    toast('설정 저장 완료', 'success');
+    updateStatusBar();
+}
+
+function loadGithubConfig() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    try {
+        const cfg = JSON.parse(raw);
+        document.getElementById('gh-owner').value = cfg.owner || '';
+        document.getElementById('gh-repo').value = cfg.repo || '';
+        document.getElementById('gh-branch').value = cfg.branch || 'main';
+        document.getElementById('gh-path').value = cfg.path || 'products.json';
+        document.getElementById('gh-token').value = cfg.token || '';
+        return cfg;
+    } catch (e) { return null; }
+}
+
+function getConfig() {
+    const cfg = loadGithubConfig();
+    if (!cfg || !cfg.owner || !cfg.repo || !cfg.token) {
+        toast('GitHub 연결 설정을 먼저 완료해주세요', 'error');
+        document.getElementById('github-config').open = true;
+        return null;
+    }
+    return cfg;
+}
+
+function updateStatusBar() {
+    const cfg = loadGithubConfig();
+    const bar = document.getElementById('status-bar');
+    if (cfg && cfg.owner && cfg.repo && cfg.token) {
+        bar.className = 'status-bar connected';
+        bar.innerHTML = `✅ 연결됨: <strong>${cfg.owner}/${cfg.repo}</strong> (${cfg.branch}) - <code>${cfg.path}</code>`;
+    } else {
+        bar.className = 'status-bar';
+        bar.innerHTML = '⚠️ 먼저 위 [GitHub 연결 설정]에서 토큰을 등록해주세요.';
+    }
+}
+
+async function testConnection() {
+    const cfg = getConfig();
+    if (!cfg) return;
+    try {
+        const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}`;
+        const res = await fetch(url, {
+            headers: { Authorization: 'token ' + cfg.token, Accept: 'application/vnd.github+json' }
+        });
+        if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+        const repo = await res.json();
+        toast(`✅ 연결 성공: ${repo.full_name}`, 'success');
+    } catch (e) {
+        toast('❌ 연결 실패: ' + e.message, 'error');
+    }
+}
+
+// ---- 데이터 로드/저장 ----
+async function loadFromGithub() {
+    const cfg = getConfig();
+    if (!cfg) return;
+    try {
+        const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}?ref=${cfg.branch}`;
+        const res = await fetch(url, {
+            headers: { Authorization: 'token ' + cfg.token, Accept: 'application/vnd.github+json' }
+        });
+        if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+        const file = await res.json();
+        // base64 디코딩 (UTF-8)
+        const content = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+        DATA = JSON.parse(content);
+        window.__lastSha = file.sha;
+        renderAll();
+        toast('GitHub에서 데이터 불러옴', 'success');
+    } catch (e) {
+        toast('불러오기 실패: ' + e.message, 'error');
+    }
+}
+
+async function saveToGithub() {
+    const cfg = getConfig();
+    if (!cfg) return;
+    pullStoreFromForm();
+    if (!confirm('GitHub에 저장하시겠습니까? 전단지 페이지에 바로 반영됩니다.')) return;
+
+    try {
+        // 1) 현재 SHA 가져오기
+        const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}?ref=${cfg.branch}`;
+        let sha = window.__lastSha;
+        try {
+            const r = await fetch(url, {
+                headers: { Authorization: 'token ' + cfg.token, Accept: 'application/vnd.github+json' }
+            });
+            if (r.ok) {
+                const f = await r.json();
+                sha = f.sha;
+            }
+        } catch (e) {}
+
+        // 2) 업로드 (UTF-8 base64 인코딩)
+        const json = JSON.stringify(DATA, null, 2);
+        const content = btoa(unescape(encodeURIComponent(json)));
+        const body = {
+            message: `update products: ${new Date().toISOString()}`,
+            content: content,
+            branch: cfg.branch
+        };
+        if (sha) body.sha = sha;
+
+        const putUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`;
+        const res = await fetch(putUrl, {
+            method: 'PUT',
+            headers: {
+                Authorization: 'token ' + cfg.token,
+                Accept: 'application/vnd.github+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.message || res.statusText);
+        }
+        const result = await res.json();
+        window.__lastSha = result.content.sha;
+        localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(DATA));
+        toast('🚀 저장 완료! 1~2분 후 페이지에 반영됩니다.', 'success');
+    } catch (e) {
+        toast('저장 실패: ' + e.message, 'error');
+    }
+}
+
+// ---- 데이터 → 화면 ----
+function renderAll() {
+    // 매장 정보 폼
+    const s = DATA.store || {};
+    document.getElementById('store-name').value = s.name || '';
+    document.getElementById('store-title').value = s.title || '';
+    document.getElementById('store-subtitle').value = s.subtitle || '';
+    document.getElementById('store-period').value = s.period || '';
+    document.getElementById('store-phone').value = s.phone || '';
+    document.getElementById('store-footer').value = s.footer_note || '';
+    renderSections();
+}
+
+function pullStoreFromForm() {
+    DATA.store = DATA.store || {};
+    DATA.store.name = document.getElementById('store-name').value;
+    DATA.store.title = document.getElementById('store-title').value;
+    DATA.store.subtitle = document.getElementById('store-subtitle').value;
+    DATA.store.period = document.getElementById('store-period').value;
+    DATA.store.phone = document.getElementById('store-phone').value;
+    DATA.store.footer_note = document.getElementById('store-footer').value;
+}
+
+function renderSections() {
+    const container = document.getElementById('sections-container');
+    container.innerHTML = '';
+    (DATA.sections || []).forEach((section, sIdx) => {
+        const div = document.createElement('div');
+        div.className = 'section-block';
+        div.innerHTML = `
+            <div class="section-header">
+                <strong>${escapeHtml(section.title || '제목없음')}</strong>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                    <button class="btn-secondary btn-small" onclick="moveSection(${sIdx},-1)">↑</button>
+                    <button class="btn-secondary btn-small" onclick="moveSection(${sIdx},1)">↓</button>
+                    <button class="btn-secondary btn-small" onclick="editSection(${sIdx})">✏️ 코너 정보</button>
+                    <button class="btn-primary btn-small" onclick="addProduct(${sIdx})">+ 상품 추가</button>
+                    <button class="btn-danger btn-small" onclick="removeSection(${sIdx})">코너 삭제</button>
+                </div>
+            </div>
+            <div class="product-list">
+                ${(section.products || []).map((p, pIdx) => productCardHtml(p, sIdx, pIdx)).join('') ||
+                  '<div style="grid-column:1/-1; color:#999; text-align:center; padding:20px;">상품이 없습니다. [상품 추가]를 눌러주세요.</div>'}
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function productCardHtml(p, sIdx, pIdx) {
+    const badge = p.badge && p.badge.text ? `<span class="pbadge">${escapeHtml(p.badge.text)}</span>` : '';
+    const oldPrice = p.old_price ? `<div class="pold">${escapeHtml(p.old_price)}</div>` : '';
+    return `
+        <div class="product-card">
+            <img src="${escapeHtml(p.image)}" onerror="this.style.background='#fcc'" alt="">
+            ${badge}
+            <div class="pname">${escapeHtml(p.name)}</div>
+            ${oldPrice}
+            <div class="pprice">${escapeHtml(p.price)}${p.unit ? escapeHtml(p.unit) : ''}</div>
+            <div class="pactions">
+                <button class="btn-secondary btn-small" onclick="moveProduct(${sIdx},${pIdx},-1)">↑</button>
+                <button class="btn-secondary btn-small" onclick="moveProduct(${sIdx},${pIdx},1)">↓</button>
+                <button class="btn-primary btn-small" onclick="editProduct(${sIdx},${pIdx})">수정</button>
+                <button class="btn-danger btn-small" onclick="removeProduct(${sIdx},${pIdx})">삭제</button>
+            </div>
+        </div>
+    `;
+}
+
+function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ---- 코너 관리 ----
+function addSection() {
+    const title = prompt('코너 제목 (예: 🥩 정육코너 특가)');
+    if (!title) return;
+    const tab = prompt('탭 이름 (짧게, 예: 정육코너)', title);
+    const id = prompt('영문 ID (URL용, 예: meat)', 'sec' + Date.now());
+    const layout = confirm('3열 그리드로 배치할까요?\n[확인] = 그리드 (정육/과일처럼)\n[취소] = 1행 리스트') ? 'grid' : 'list';
+    DATA.sections = DATA.sections || [];
+    DATA.sections.push({ id, title, tab_label: tab, layout, products: [] });
+    renderSections();
+}
+
+function editSection(idx) {
+    const s = DATA.sections[idx];
+    const title = prompt('코너 제목', s.title);
+    if (title === null) return;
+    const tab = prompt('탭 이름', s.tab_label || s.title);
+    if (tab === null) return;
+    const id = prompt('영문 ID', s.id);
+    if (id === null) return;
+    const layout = confirm('3열 그리드로 배치? (취소=리스트)') ? 'grid' : 'list';
+    Object.assign(s, { title, tab_label: tab, id, layout });
+    renderSections();
+}
+
+function removeSection(idx) {
+    if (!confirm('이 코너를 삭제할까요? 안의 상품도 모두 삭제됩니다.')) return;
+    DATA.sections.splice(idx, 1);
+    renderSections();
+}
+
+function moveSection(idx, dir) {
+    const arr = DATA.sections;
+    const ni = idx + dir;
+    if (ni < 0 || ni >= arr.length) return;
+    [arr[idx], arr[ni]] = [arr[ni], arr[idx]];
+    renderSections();
+}
+
+// ---- 상품 관리 ----
+function addProduct(sIdx) {
+    editing = { sectionIndex: sIdx, productIndex: null };
+    document.getElementById('product-modal-title').textContent = '상품 추가';
+    fillProductForm({});
+    openProductModal();
+}
+
+function editProduct(sIdx, pIdx) {
+    editing = { sectionIndex: sIdx, productIndex: pIdx };
+    document.getElementById('product-modal-title').textContent = '상품 수정';
+    fillProductForm(DATA.sections[sIdx].products[pIdx]);
+    openProductModal();
+}
+
+function removeProduct(sIdx, pIdx) {
+    if (!confirm('상품을 삭제할까요?')) return;
+    DATA.sections[sIdx].products.splice(pIdx, 1);
+    renderSections();
+}
+
+function moveProduct(sIdx, pIdx, dir) {
+    const arr = DATA.sections[sIdx].products;
+    const ni = pIdx + dir;
+    if (ni < 0 || ni >= arr.length) return;
+    [arr[pIdx], arr[ni]] = [arr[ni], arr[pIdx]];
+    renderSections();
+}
+
+function fillProductForm(p) {
+    document.getElementById('p-name').value = p.name || '';
+    document.getElementById('p-image').value = p.image || '';
+    document.getElementById('p-old-price').value = p.old_price || '';
+    document.getElementById('p-price').value = p.price || '';
+    document.getElementById('p-unit').value = p.unit || '';
+    document.getElementById('p-badge-text').value = p.badge?.text || '';
+    document.getElementById('p-badge-type').value = p.badge?.type || 'limit';
+    document.getElementById('p-badge-anim').value = p.badge?.anim || '';
+    updateImagePreview();
+}
+
+function updateImagePreview() {
+    const url = document.getElementById('p-image').value.trim();
+    const img = document.getElementById('p-image-preview');
+    if (url) { img.src = url; img.style.display = 'block'; }
+    else { img.style.display = 'none'; }
+}
+
+function openProductModal() { document.getElementById('product-modal').classList.add('show'); }
+function closeProductModal() { document.getElementById('product-modal').classList.remove('show'); }
+
+function saveProduct() {
+    const name = document.getElementById('p-name').value.trim();
+    const image = document.getElementById('p-image').value.trim();
+    const price = document.getElementById('p-price').value.trim();
+    if (!name || !image || !price) {
+        toast('상품명, 이미지, 가격은 필수입니다', 'error');
+        return;
+    }
+    const p = { name, image, price };
+    const oldPrice = document.getElementById('p-old-price').value.trim();
+    const unit = document.getElementById('p-unit').value.trim();
+    if (oldPrice) p.old_price = oldPrice;
+    if (unit) p.unit = unit;
+    const badgeText = document.getElementById('p-badge-text').value.trim();
+    if (badgeText) {
+        p.badge = {
+            text: badgeText,
+            type: document.getElementById('p-badge-type').value,
+        };
+        const anim = document.getElementById('p-badge-anim').value;
+        if (anim) p.badge.anim = anim;
+    }
+
+    const { sectionIndex, productIndex } = editing;
+    if (productIndex === null) {
+        DATA.sections[sectionIndex].products.push(p);
+    } else {
+        DATA.sections[sectionIndex].products[productIndex] = p;
+    }
+    closeProductModal();
+    renderSections();
+    toast('상품 저장됨 (아직 GitHub에는 미반영)', 'info');
+}
+
+// ---- JSON 임포트/익스포트 ----
+function exportJson() {
+    pullStoreFromForm();
+    const json = JSON.stringify(DATA, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'products.json';
+    a.click();
+}
+
+function importJson(ev) {
+    const file = ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        try {
+            DATA = JSON.parse(e.target.result);
+            renderAll();
+            toast('JSON 가져오기 완료', 'success');
+        } catch (err) {
+            toast('잘못된 JSON 파일: ' + err.message, 'error');
+        }
+    };
+    reader.readAsText(file);
+    ev.target.value = '';
+}
+
+// ---- 초기 로드 ----
+async function init() {
+    loadGithubConfig();
+    updateStatusBar();
+
+    // 1) 캐시에서 복구
+    const cached = localStorage.getItem(DATA_CACHE_KEY);
+    if (cached) {
+        try { DATA = JSON.parse(cached); } catch (e) {}
+    }
+
+    // 2) products.json이 같은 폴더에 있으면 자동 로드 (오프라인 편집용)
+    if (!DATA.sections || DATA.sections.length === 0) {
+        try {
+            const r = await fetch('products.json?t=' + Date.now());
+            if (r.ok) DATA = await r.json();
+        } catch (e) {}
+    }
+
+    // 3) GitHub 설정 있으면 자동 동기화
+    const cfg = loadGithubConfig();
+    if (cfg && cfg.owner && cfg.repo && cfg.token) {
+        await loadFromGithub();
+    }
+
+    if (!DATA.sections) DATA.sections = [];
+    if (!DATA.store) DATA.store = {};
+    renderAll();
+
+    // 입력 변경 시 자동 캐시
+    setInterval(() => {
+        pullStoreFromForm();
+        try { localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(DATA)); } catch (e) {}
+    }, 5000);
+}
+
+init();
+</script>
+
+</body>
+</html>

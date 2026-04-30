@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한국마트 비전점 온라인 주문전단</title>
+    <title>오늘의 전단지</title>
     <style>
         body {
-            background-color: #2d4a1e;
+            background-color: #222;
             font-family: '맑은 고딕', sans-serif;
             display: flex;
             justify-content: center;
@@ -14,215 +14,142 @@
             padding: 20px;
         }
         html { scroll-behavior: smooth; }
+
         .flyer-box {
             background-color: white;
             width: 100%;
             max-width: 800px;
-            min-width: 280px;
+            min-width: 200px;
             margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+            border-radius: 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
-        .header-wrap {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .header {
-            background: linear-gradient(135deg, #1a3a0a 0%, #2d5c10 50%, #1e4a0c 100%);
-            color: white;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .logo-img {
-            width: 62px;
-            height: 62px;
-            object-fit: contain;
-            border-radius: 10px;
-            background: #fff;
-            padding: 3px;
-            flex-shrink: 0;
-        }
-        .header-text h1 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-        }
-        .header-text .sub {
-            margin-top: 3px;
-            font-size: 12px;
-            color: rgba(255,255,255,0.78);
-        }
+
+        .header-wrap { position: sticky; top: 0; z-index: 10; }
+        .header, .tab-nav { background-color: #fff; }
+        .header { background-color: #d32f2f; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .header p { margin: 5px 0 0; font-size: 14px; opacity: 0.8; }
+
         .store-info {
-            background-color: #f1f8e9;
+            background-color: #fff8e1;
             padding: 6px 12px;
             font-size: 12px;
             text-align: center;
-            border-bottom: 2px solid #7cb342;
-            color: #33691e;
+            border-bottom: 1px solid #ffe082;
         }
         .store-info div + div { margin-top: 2px; }
+
         .tab-nav {
             display: flex;
             gap: 8px;
             justify-content: flex-start;
             padding: 10px 12px;
             border-bottom: 1px solid #eee;
-            background-color: #fff;
             overflow-x: auto;
         }
         .tab-nav::-webkit-scrollbar { display: none; }
         .tab-nav button {
-            border: 1.5px solid #ddd;
+            border: none;
             background-color: #f5f5f5;
-            padding: 7px 14px;
+            padding: 8px 12px;
             border-radius: 999px;
             font-size: 13px;
-            font-family: inherit;
             cursor: pointer;
             white-space: nowrap;
-            color: #555;
-            transition: all 0.18s;
         }
-        .tab-nav button:hover {
-            background-color: #dcedc8;
-            border-color: #8bc34a;
-            color: #33691e;
-        }
-        .tab-nav button.active {
-            background-color: #558b2f;
-            border-color: #558b2f;
-            color: #fff;
-            font-weight: bold;
-        }
-        .product-list { padding: 18px 20px 20px; }
-        .section-banner {
-            background: linear-gradient(90deg, #dcedc8, #f1f8e9);
-            padding: 10px 14px;
-            margin: 18px 0 10px;
-            font-weight: 900;
-            font-size: 16px;
-            border-left: 6px solid #558b2f;
-            letter-spacing: 0.4px;
-            color: #1b5e20;
-        }
-        .product-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
+        .tab-nav button:hover { background-color: #ffd54f; }
+        .tab-nav button.active { background-color: #ffca28; color: #000; font-weight: bold; }
+
+        .product-list { padding: 20px; }
         .product-item {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            border-bottom: 1px dashed #d2d2d2;
-            padding: 14px 0;
-        }
-        .product-item:last-child { border-bottom: none; }
-        .product-left {
-            position: relative;
-            width: 210px;
-            min-width: 210px;
-            height: 158px;
-            flex-shrink: 0;
-            background: #ffffff;
-            border-radius: 4px;
-            border: 3px solid #8bc34a;
-            overflow: hidden;
-        }
-        .product-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            background: #ffffff;
-        }
-        .product-right {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
-            text-align: right;
-        }
-        .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            font-size: 11px;
-            border-radius: 4px;
-            color: #fff;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        .badge-limit { background-color: #e53935; }
-        .badge-new { background-color: #558b2f; }
-        .badge-pulse { animation: badge-pulse 1.2s ease-in-out infinite; }
-        .badge-blink { animation: badge-blink 1s steps(1, start) infinite; }
-        @keyframes badge-blink { 50% { opacity: 0; } }
-        @keyframes badge-pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(85,139,47,0.6); }
-            70% { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(85,139,47,0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(85,139,47,0); }
-        }
-        .product-name {
-            font-size: 30px;
-            font-weight: 800;
-            color: #222;
-            line-height: 1.25;
-            margin-bottom: 10px;
-            word-break: keep-all;
-            width: 100%;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
             text-align: center;
         }
-        .old-price {
-            text-decoration: line-through;
-            color: #888;
-            font-size: 16px;
-            margin-bottom: 4px;
+        .product-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+        .product-img {
             width: 100%;
-            text-align: right;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 5px solid #ff0000;
         }
-        .product-spec {
-            font-size: 16px;
+        .product-name {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+        @media (max-width: 640px) {
+            .product-name { font-size: 18px; }
+        }
+
+        .old-price { text-decoration: line-through; color: #999; font-size: 14px; }
+        .price { color: #d32f2f; font-size: 28px; font-weight: 900; }
+        .price .unit { font-size: 14px; font-weight: 500; }
+
+        .footer {
+            background-color: #eee;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
             color: #666;
-            margin-bottom: 6px;
-            width: 100%;
-            text-align: right;
         }
-        .price {
-            color: #c62828;
-            font-size: 34px;
-            font-weight: 900;
-            line-height: 1.1;
-            text-align: right;
-            width: 100%;
-        }
-        .price .unit {
-            font-size: 16px;
-            font-weight: 600;
-            color: #555;
-            margin-left: 2px;
-        }
+
         .scroll-fade {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        .scroll-fade.show {
-            opacity: 1;
-            transform: translateY(0);
+        .scroll-fade.show { opacity: 1; transform: translateY(0); }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
-        .footer {
-            background: linear-gradient(135deg, #1a3a0a, #2d5c10);
-            color: #c5e1a5;
-            padding: 18px;
-            text-align: center;
-            font-size: 12px;
+        .product-grid .product-item {
+            margin-bottom: 0;
+            padding-bottom: 10px;
+            border-bottom: none;
         }
+
+        .section-banner {
+            background: linear-gradient(90deg, #ffeb3b, #fffde7);
+            padding: 8px 12px;
+            margin: 16px 0 8px;
+            font-weight: 900;
+            font-size: 16px;
+            border-left: 6px solid #f57c00;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 11px;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .badge-limit { background-color: #e53935; }
+        .badge-new { background-color: #43a047; }
+
+        .badge-blink { animation: badge-blink 1s steps(1, start) infinite; }
+        @keyframes badge-blink { 50% { opacity: 0; } }
+
+        .badge-pulse { animation: badge-pulse 1.2s ease-in-out infinite; }
+        @keyframes badge-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.6); }
+            70% { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(229, 57, 53, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 57, 53, 0); }
+        }
+
         .btn-top {
             position: fixed;
             right: 16px;
@@ -231,964 +158,182 @@
             font-size: 12px;
             border-radius: 999px;
             border: none;
-            background-color: #558b2f;
+            background-color: #d32f2f;
             color: #fff;
             cursor: pointer;
-            opacity: 0.85;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            opacity: 0.8;
         }
-         /* 공산코너 그리드 레이아웃 */
-        .grocery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            padding: 4px 0;
-        }
-        .grocery-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fff;
-        }
-        .grocery-img-wrap {
-            width: 100%;
-            aspect-ratio: 1 / 1;   /* 정사각형 틀 */
-            overflow: hidden;
-            background: #f9f9f9;
-            position: relative;
-        }
-        .grocery-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            position: relative;
-        }
-        .grocery-info {
-            width: 100%;
-            padding: 6px 8px;
-            box-sizing: border-box;
+        .btn-top:hover { opacity: 1; }
+
+        .loading {
             text-align: center;
-        }
-        .grocery-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 2px;
-            word-break: keep-all;
-            line-height: 1.3;
-        }
-        .grocery-spec {
-            font-size: 11px;
-            color: #888;
-            margin-bottom: 4px;
-        }
-        .grocery-old-price {
-            font-size: 11px;
-            color: #aaa;
-            text-decoration: line-through;
-            margin-bottom: 2px;
-        }
-        .grocery-price {
-            font-size: 16px;
-            font-weight: 900;
-            color: #c62828;
-        }
-        .grocery-price .unit {
-            font-size: 11px;
-            color: #555;
-        }
-        .grocery-badge {
-            position: absolute;
-            top: 6px;
-            left:6px;
-            display: inline-block;
-            padding: 2px 6px;
-            font-size: 10px;
-            border-radius: 4px;
-            color: #fff;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        @media (max-width: 640px) {
-            body { padding: 0; }
-            .flyer-box { max-width: 100%; }
-            .product-list { padding: 14px; }
-            .product-item { gap: 12px; align-items: flex-start; }
-            .product-left { width: 145px; min-width: 145px; height: 108px; }  /* ← height 추가 */
-            .product-img { width: 100%; height: 100%; }
-            .product-name { font-size: 22px; margin-bottom: 8px; }
-            .old-price { font-size: 13px; }
-            .price { font-size: 25px; }
-            .price .unit { font-size: 13px; }
-            .grocery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .grocery-name { font-size: 12px; }
-            .grocery-price { font-size: 14px; }
+            padding: 40px 20px;
+            color: #999;
         }
     </style>
 </head>
 <body>
+
     <div class="flyer-box">
+        <!-- 헤더 -->
         <div class="header-wrap">
             <div class="header">
-                <img src="martlogo.png" class="logo-img" alt="한국마트 비전점 로고">
-                <div class="header-text">
-                    <h1>한국마트 비전점</h1>
-                    <div class="sub">온라인 전단</div>
-                </div>
+                <h1 id="store-title">로딩중...</h1>
+                <p id="store-subtitle"></p>
             </div>
             <div class="store-info">
-                <div>📅 행사기간: 현제 페이지는 테스트 페이지입니다.</div>
-                <div>📞 문의전화: 031-655-8431</div>
-            </div> 
-            <div class="tab-nav">
-                <button class="active" onclick="scrollToSection('banner-top', this)">전체상품</button>
-                <button onclick="scrollToSection('banner-meat', this)">정육코너</button>
-                
-                <button onclick="scrollToSection('banner-grocery', this)">공산코너</button>
+                <div id="store-name"></div>
+                <div id="store-period"></div>
             </div>
+            <div class="tab-nav" id="tab-nav"></div>
         </div>
 
         <div id="all-products" class="product-list">
-            <div id="banner-top" class="section-banner">🔝 오늘의 추천 상품</div>
-            <div id="top-section"></div>
-
-            <div id="banner-meat" class="section-banner">🥩 정육코너 특가</div>
-            <div id="meat-section" class="product-grid"></div>
-            
-
-            <div id="banner-grocery" class="section-banner">🛒 공산코너 특가</div>
-            <div id="grocery-section" class="grocery-grid"></div>
+            <div class="loading">상품을 불러오는 중...</div>
         </div>
 
-        <div class="footer">📞 문의전화: 031-655-8431<br>※ 조기 품절될 수 있습니다.</div>
+        <div class="footer" id="footer"></div>
     </div>
-    <button class="btn-top" onclick="scrollToSection('banner-top')">▲ TOP</button>
+
+    <button class="btn-top" onclick="scrollToSection(window.__firstSection)">▲ TOP</button>
 
 <script>
+// ============================================================
+// 한국마트 전단지 - 동적 렌더링
+// products.json 파일을 읽어와서 자동으로 화면을 그립니다.
+// ============================================================
 
-/*    위, 정육~공산 사이에 집어넣기 
-            <button onclick="scrollToSection('banner-fruit', this)">과일코너</button>
-            <div id="banner-fruit" class="section-banner">🍇 과일코너 특가</div>
-            <div id="fruit-section" class="product-grid"></div>*/  
-// 1) 상품 데이터 - 여기만 수정하면 됨
-const PRODUCTS = {
-  top: [
-    {
-      name: "산지직송 성주 꿀참외",
-      badge: "인기상품",
-      oldPrice: 15000,
-      spec: "6개/봉",
-      price: 9900,
-      badgeType: "new",
-      review: null,
-      unit: "원",
-      img: "https://oasisprodproduct.edge.naverncp.com/72591/detail/detail_72591_0_5a6f649a-1019-4895-89aa-f9da26049493.jpg",
-      alt: "산지직송 성주 꿀참외"
-    },
-    /*{
-      name: "시금치",
-      oldPrice: 4800,
-      spec: "5입/멀티",
-      price: 3480,
-      badge: "1가정 2봉",
-      badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/veg/sna.jpg",
-      alt: "신라면"
-    },*/
-    {
-      name: "산지직송 안동 부사",
-      badge: "인기상품",
-      oldPrice: 35000,
-      price: 27800,
-      spec: "10개/봉",
-      badgeType: "new",
-      review: null,
-      unit: "원",
-      img: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80",
-      alt: "산지직송 안동 부사"
+const DATA_URL = 'products.json?t=' + Date.now(); // 캐시 방지
+
+async function loadFlyer() {
+    try {
+        const res = await fetch(DATA_URL);
+        if (!res.ok) throw new Error('데이터 로드 실패');
+        const data = await res.json();
+        renderFlyer(data);
+    } catch (err) {
+        document.getElementById('all-products').innerHTML =
+            '<div class="loading">데이터를 불러올 수 없습니다.<br>' + err.message + '</div>';
     }
-  ],
-  meat: [
-    {
-      name: "한돈 앞다리살",
-      oldPrice: 9800,
-      spec: "600g/근",
-      price: 7280,
-      badge: "4월특가세일",
-      badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/meat/frontlegmeat.jpg",
-      alt: "한돈 앞다리살"
-    },
-    {
-      name: "한우 국거리",
-      oldPrice: 12800,
-      spec: "1팩",
-      price: 9900,
-      badge: "데-박",
-      badgeType: "인기상품",
-      review: null,
-      unit: "원",
-      img: "resource/meat/gukgeori.jpg",
-      alt: "한우 국거리"
-    },
-  /*{
-      name: "냉동 돼지갈비",
-      oldPrice: 1500,
-      spec: "100g",
-      price: 12000,
-      badge: "맛잇숴요",
-      badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/meat/ppyeojjim.jpg",
-      alt: "냉동 돼지갈비"
-    },
-    {
-      name: "국내산 생삼겹살4 (600g)",
-      oldPrice: 22000,
-      price: 14500,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원",
-      img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
-      alt: "국내산 생삼겹살"
-    },
-    {
-      name: "국내산 생삼겹살5 (600g)",
-      oldPrice: 22000,
-      price: 14500,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원",
-      img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
-      alt: "국내산 생삼겹살"
-    },
-    {
-      name: "국내산 생삼겹살6 (600g)",
-      oldPrice: 22000,
-      price: 14500,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원",
-      img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
-      alt: "국내산 생삼겹살"
-    },
-    {
-      name: "국내산 생삼겹살7 (600g)",
-      oldPrice: 22000,
-      price: 14500,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원",
-      img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
-      alt: "국내산 생삼겹살"
-    },
-    {
-      name: "국내산 생삼겹살8 (600g)",
-      oldPrice: 22000,
-      price: 14500,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원",
-      img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
-      alt: "국내산 생삼겹살"
-    },
-    {
-      name: "국내산 생삼겹살9 (600g)",
-      oldPrice: 22000,
-      price: 14500,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원",
-      img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80",
-      alt: "국내산 생삼겹살"
-    }*/
-  ],
-  /*fruit: [
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: "개꿀맛도리",
-      badgeType: "limit",
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
-    },
-    {
-      name: "샤인머스캣(냉장)",
-      oldPrice: 25000,
-      price: 19800,
-      badge: null,
-      badgeType: null,
-      review: null,
-      unit: "원/100g",
-      img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-      alt: "샤인머스캣"
+}
+
+function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function renderBadge(badge) {
+    if (!badge || !badge.text) return '';
+    const type = badge.type || 'limit';
+    const anim = badge.anim ? ' badge-' + escapeHtml(badge.anim) : '';
+    return `<span class="badge badge-${escapeHtml(type)}${anim}">${escapeHtml(badge.text)}</span>`;
+}
+
+function renderProduct(p) {
+    const badge = renderBadge(p.badge);
+    const oldPrice = p.old_price ? `<span class="old-price">${escapeHtml(p.old_price)}</span>` : '';
+    const unit = p.unit ? `<span class="unit">${escapeHtml(p.unit)}</span>` : '';
+    return `
+        <div class="product-item scroll-fade">
+            ${badge}
+            <img src="${escapeHtml(p.image)}" class="product-img" loading="lazy" alt="${escapeHtml(p.name)}">
+            <div class="product-name">${escapeHtml(p.name)}</div>
+            ${oldPrice}
+            <div class="price">${escapeHtml(p.price)}${unit}</div>
+        </div>
+    `;
+}
+
+function renderFlyer(data) {
+    // 헤더
+    const store = data.store || {};
+    document.title = store.title || '오늘의 전단지';
+    document.getElementById('store-title').textContent = store.title || '';
+    document.getElementById('store-subtitle').textContent = store.subtitle || '';
+    document.getElementById('store-name').textContent = store.name || '';
+    document.getElementById('store-period').textContent =
+        store.period ? '행사기간: ' + store.period : '';
+    document.getElementById('footer').innerHTML =
+        (store.phone ? '문의전화: ' + escapeHtml(store.phone) + '<br>' : '') +
+        (store.footer_note ? escapeHtml(store.footer_note) : '');
+
+    // 탭
+    const tabNav = document.getElementById('tab-nav');
+    tabNav.innerHTML = (data.sections || []).map(s =>
+        `<button onclick="scrollToSection('banner-${escapeHtml(s.id)}')">${escapeHtml(s.tab_label || s.title)}</button>`
+    ).join('');
+
+    // 섹션 + 상품
+    const container = document.getElementById('all-products');
+    container.innerHTML = (data.sections || []).map(section => {
+        const productsHtml = (section.products || []).map(renderProduct).join('');
+        const wrapClass = section.layout === 'grid' ? 'product-grid' : '';
+        return `
+            <div id="banner-${escapeHtml(section.id)}" class="section-banner">
+                ${escapeHtml(section.title)}
+            </div>
+            <div class="${wrapClass}">${productsHtml}</div>
+        `;
+    }).join('');
+
+    // 첫 번째 섹션 ID 저장 (TOP 버튼용)
+    if (data.sections && data.sections[0]) {
+        window.__firstSection = 'banner-' + data.sections[0].id;
     }
-  ],*/
 
-  grocery: [   
-    {
-      name: "카프리썬",
-      oldPrice: 6800,
-      price: 4980,
-      spec: "10입/박스",
-      badge: "한정",
-      badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/drink/caprisun.jpg",
-      alt: "카프리썬"
-    },
-    {
-      name: "레쓰비",
-      oldPrice: 12800,
-      price: 8900,
-      spec: "30입/박스",
-      badge: "6입 1980원",
-      badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/drink/letsbe.jpg",
-      alt: "레쓰비 1박스"
-    },
-    {
-      name: "롯데 칠성사이다/펩시콜라",
-      oldPrice: 4800,
-      price: 1980,
-      spec: "2L",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/drink/pepsicider.jpg",
-      alt: "롯데 칠성사이다/펩시콜라"
-    },
-    {
-      name: "오비 필굿 맥주 피쳐",
-      oldPrice: 3980,
-      price: 2980,
-      spec: "1.6L",
-      //badge: "한정",
-      //badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/drink/filgood.jpg",
-      alt: "오비 필굿 맥주 피쳐"
-    },
-    /*{
-      name: "백설 콩식용유",
-      oldPrice: 7980,
-      price: 5980,
-      spec: "1.8L",
-      //badge: "한정",
-      //badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/beanoil.jpg",
-      alt: "백설 콩식용유"
-    },
-    {
-      name: "샘표 진간장 금F3",
-      oldPrice: 9800,
-      price: 8900,
-      spec: "1.7+500ml",
-      //badge: "한정",
-      //badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/realsoysoucegoldf3.jpg",
-      alt: "샘표 진간장 금F3"
-    },
-    {
-      name: "샘표 진간장 S",
-      oldPrice: 6980,
-      price: 4980,
-      spec: "1.7L",
-      //badge: "한정",
-      //badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/realsoysouces.jpg",
-      alt: "샘표 진간장 S"
-    },*/
-    {
-      name: "CJ 햇반 박스",
-      oldPrice: 18000,
-      price: 9900,
-      spec: "12개입/박스",
-      badge: "한정",
-      badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/hatban.jpg",
-      alt: "CJ 햇반"
-    },
-    {
-      name: "슈퍼오닝",
-      oldPrice: 49800,
-      price: 42800,
-      spec: "10kg",
-      //badge: "한정",
-      //badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/superoning.jpg",
-      alt: "슈퍼오닝"
-    },
-    /*{
-      name: "풀무원 피자 2종",
-      oldPrice: 4980,
-      price: 2980,
-      spec: "1박스",
-      badge: "한정",
-      badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/nangdong/pulpizza.jpg",
-      alt: "풀무원 피자"
-    },*/
-    {
-      name: "오뚜기 옛날참기름",
-      oldPrice: 9800,
-      price: 6980,
-      spec: "450ml",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/sesameoil.jpg",
-      alt: "오뚜기 옛날참기름"
-    },
-    {
-      name: "백설 콩식용유",
-      oldPrice: 7980,
-      price: 5980,
-      spec: "1.8L",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/beanoil.jpg",
-      alt: "백설 콩식용유"
-    },
-    {
-      name: "샘표 진간장 금F3",
-      oldPrice: 9800,
-      price: 8900,
-      spec: "1.7+500ml",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/realsoysoucegoldf3.jpg",
-      alt: "샘표 진간장 금F3"
-    },
-    {
-      name: "샘표 진간장 S",
-      oldPrice: 6980,
-      price: 4980,
-      spec: "1.7L",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/realsoysouces.jpg",
-      alt: "샘표 진간장 S"
-    },
-    {
-      name: "삼립 베리굿 딸기쨈",
-      oldPrice: 5000,
-      price: 3980,
-      spec: "480g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/verrygoodstrawberryjam.jpg",
-      alt: "삼립 베리굿 딸기쨈"
-    },
-    {
-      name: "리고 땅콩버터 청키",
-      oldPrice: 9800,
-      price: 3980,
-      spec: "462g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/ligopeanutbutterchunky.jpg",
-      alt: "리고 땅콩버터 청키"
-    },
-    {
-      name: "오뚜기 앙버터쨈/딸기버터쨈",
-      oldPrice: 6980,
-      price: 3980,
-      spec: "280g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/condiment/butterjam.jpg",
-      alt: "오뚜기 앙버터쨈/딸기버터쨈"
-    },
-    {
-      name: "유동 번데기탕",
-      oldPrice: 3500,
-      price: 1980,
-      spec: "280g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/can/bundaegitang.jpg",
-      alt: "유동 번데기탕"
-    },
-    {
-      name: "유동 골뱅이",
-      oldPrice: 9800,
-      price: 7980,
-      spec: "300g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/can/wildseasnail.jpg",
-      alt: "유동 골뱅이"
-    },
-    {
-      name: "오레오 오즈",
-      oldPrice: 9900,
-      price: 7980,
-      spec: "500g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/oreoos.jpg",
-      alt: "오레오 오즈"
-    },
-    {
-      name: "포스트 아몬드후레이크",
-      oldPrice: 8900,
-      price: 6980,
-      spec: "620g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/amondflake.jpg",
-      alt: "포스트 아몬드후레이키"
-    },
-    {
-      name: "켈로그 콘푸로스트",
-      oldPrice: 7980,
-      price: 3980,
-      spec: "600g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/crishyo.jpg",
-      alt: "켈로그 콘푸로스트"
-    },
-    {
-      name: "미왕 쌀과자",
-      oldPrice: 3800,
-      price: 2980,
-      spec: "250g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/miwaingorigin.jpg",
-      alt: "미왕 쌀과자"
-    },
-    {
-      name: "해태 오예스",
-      oldPrice: 7980,
-      price: 5980,
-      spec: "16+2",
-      //badge: "한정",
-      //badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/snac/oyes.jpg",
-      alt: "해태 오예스"
-    },
-    {
-      name: "오리온 카스타드",
-      oldPrice: 4800,
-      price: 2980,
-      spec: "12입",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/orioncastard.jpg",
-      alt: "오리온 카스타드"
-    },
-    {
-      name: "오리온 초코칩쿠키 2번들",
-      oldPrice: 5800,
-      price: 4980,
-      spec: "2번들",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/onrionchocochip.jpg",
-      alt: "오리온 초코칩쿠키 2번들"
-    },
-    {
-      name: "오리온 고소미",
-      oldPrice: 7980,
-      price: 5980,
-      spec: "16p",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/snac/gosomi.jpg",
-      alt: "오리온 고소미"
-    },
-    {
-      name: "해태 홈런볼",
-      oldPrice: 6800,
-      price: 3980,
-      spec: "4입/번들",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/snac/homerunball.jpg",
-      alt: "해태 홈런볼"
-    },
-    {
-      name: "롯데 카스타드",
-      oldPrice: 4500,
-      price: 3980,
-      spec: "230g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/snac/lottecastard.jpg",
-      alt: "롯데 카스타드"
-    },
-    {
-      name: "롯데 마가렛트",
-      oldPrice: 6800,
-      price: 4980,
-      spec: "352g",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/snac/lottemagalet.jpg",
-      alt: "롯데 마가렛트"
-    },
-    {
-      name: "삼양 짜짜로니",
-      oldPrice: 5400,
-      price: 3980,
-      spec: "5입/멀티",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/ramen/jajaloni.jpg",
-      alt: "삼양 짜짜로니"
-    },
-    {
-      name: "농심 신라면툼바",
-      oldPrice: 5400,
-      price: 3980,
-      spec: "4입/멀티",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/ramen/sniramentoomba.jpg",
-      alt: "농심 신라면툼바"
-    },
-    {
-      name: "배홍동 막국수",
-      oldPrice: 5800,
-      price: 4500,
-      spec: "4입/멀티",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/ramen/bahongdongmakgooksu.jpg",
-      alt: "배홍동 막국수"
-    },
-    {
-      name: "삼양 1963",
-      oldPrice: 5800,
-      price: 4980,
-      spec: "4입/멀티",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/grocery/ramen/1963.jpg",
-      alt: "삼양 1963"
-    },
-    {
-      name: "리큐 구연산파워",
-      oldPrice: 12800,
-      price: 8900,
-      spec: "2L×2",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/etc/liqx2.jpg",
-      alt: "리큐 구연산파워"
-    },
-    {
-      name: "유한 현미/오트깔끔 주방세제",
-      oldPrice: 3500,
-      price: 1980,
-      spec: "1L",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/etc/hyunmiandoat.jpg",
-      alt: "유한 현미/오트깔끔 주방세제"
-    },
-    {
-      name: "애경 순샘리필",
-      oldPrice: 3500,
-      price: 1980,
-      spec: "1L",
-      /*badge: "한정",
-      badgeType: "limit",*/
-      review: null,
-      unit: "원",
-      img: "resource/etc/ssal.jpg",
-      alt: "애경 순샘리필"
-    },
-    /*{
-      name: "삼양 1963",
-      oldPrice: 7980,
-      price: 5980,
-      spec: "1L",
-      //badge: "한정",
-      //badgeType: "limit",
-      review: null,
-      unit: "원",
-      img: "resource/grocery/ramen/1963.jpg",
-      alt: "삼양 1963"
-    },*/
-  ]
-};
-
-// 2) 카드 생성
-function createCard(p) {
-  const badgeHtml = p.badge
-    ? `<span class="badge ${p.badgeType === 'new' ? 'badge-new' : 'badge-limit'}">${p.badge}</span>`
-    : "";
-
-  const specHtml = p.spec
-    ? `<div class="product-spec">${p.spec}</div>`
-    : "";
-    
-  const priceHtml = p.unit
-    ? `<div class="price">${p.price.toLocaleString()}<span class="unit">${p.unit}</span></div>`
-    : `<div class="price">${p.price.toLocaleString()}원</div>`;
-
-  return `
-  <div class="product-item scroll-fade">
-    <div class="product-left">
-      <img src="${p.img}" alt="${p.alt}" class="product-img">
-    </div>
-    <div class="product-right">
-      <div class="product-name">${p.name}</div>
-      ${badgeHtml}
-      ${specHtml}
-      <span class="old-price">${p.oldPrice.toLocaleString()}원</span>
-      ${priceHtml}
-    </div>
-  </div>`;
+    // 애니메이션 + 탭 스크롤 활성화
+    initObservers(data.sections || []);
 }
 
-function createGroceryCard(p) {
-  const badgeHtml = p.badge
-    ? `<div class="grocery-badge ${p.badgeType === 'new' ? 'badge-new' : 'badge-limit'}">${p.badge}</div>`
-    : "";
-  const specHtml = p.spec
-    ? `<div class="grocery-spec">${p.spec}</div>`
-    : "";
-  const oldPriceHtml = p.oldPrice
-    ? `<div class="grocery-old-price">${p.oldPrice.toLocaleString()}원</div>`
-    : "";
-  const priceHtml = `<div class="grocery-price">${p.price.toLocaleString()}<span class="unit">${p.unit || '원'}</span></div>`;
+function initObservers(sections) {
+    // 페이드인
+    const targets = document.querySelectorAll('.scroll-fade');
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add('show');
+            else entry.target.classList.remove('show');
+        });
+    }, { threshold: 0.2 });
+    targets.forEach(el => fadeObserver.observe(el));
 
-  return `
-  <div class="grocery-card scroll-fade">
-    <div class="grocery-img-wrap">
-      ${badgeHtml}
-      <img src="${p.img}" alt="${p.alt}">
-    </div>
-    <div class="grocery-info">
-      <div class="grocery-name">${p.name}</div>
-      ${specHtml}
-      ${oldPriceHtml}
-      ${priceHtml}
-    </div>
-  </div>`;
-}
-
-// 3) 렌더링
-function renderAll() {
-  document.getElementById("top-section").innerHTML   = PRODUCTS.top.map(createCard).join("");
-  document.getElementById("meat-section").innerHTML  = PRODUCTS.meat.map(createCard).join("");
-  //document.getElementById("fruit-section").innerHTML = PRODUCTS.fruit.map(createCard).join("");
-  document.getElementById("grocery-section").innerHTML = PRODUCTS.grocery.map(createGroceryCard).join("");
-  initScrollFade();
-}
-
-// 스크롤 애니메이션
-function initScrollFade() {
-  const targets = document.querySelectorAll('.scroll-fade');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-        observer.unobserve(entry.target);
-      }
+    // 탭 활성화
+    const tabButtons = document.querySelectorAll('.tab-nav button');
+    const sectionMap = {};
+    sections.forEach((s, i) => {
+        const id = 'banner-' + s.id;
+        const el = document.getElementById(id);
+        if (el && tabButtons[i]) sectionMap[id] = tabButtons[i];
     });
-  }, { threshold: 0.1 });
-  targets.forEach((el) => observer.observe(el));
+
+    const navObserver = new IntersectionObserver((entries) => {
+        const visible = entries
+            .filter(e => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const id = visible.target.id;
+        document.querySelectorAll('.tab-nav button').forEach(btn => btn.classList.remove('active'));
+        if (sectionMap[id]) sectionMap[id].classList.add('active');
+    }, { threshold: 0.4 });
+
+    Object.keys(sectionMap).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) navObserver.observe(el);
+    });
 }
 
-// 4) 탭 스크롤
-function scrollToSection(id, btn) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const headerWrap = document.querySelector('.header-wrap');
-  const headerHeight = headerWrap ? headerWrap.offsetHeight : 0;
-  const target = el.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
-  window.scrollTo({ top: target, behavior: 'smooth' });
-  if (btn) {
-    document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+function scrollToSection(id) {
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    const headerWrap = document.querySelector('.header-wrap');
+    const headerHeight = headerWrap ? headerWrap.offsetHeight : 0;
+    window.scrollTo({ top: el.offsetTop - headerHeight, behavior: 'smooth' });
 }
 
-// 탭 자동 활성화
-const sectionIds = ['banner-top', 'banner-meat', 'banner-fruit', 'banner-grocery'];
-const tabMap = {};
-sectionIds.forEach(id => {
-  tabMap[id] = document.querySelector(`button[onclick*="${id}"]`);
-});
-const navObserver = new IntersectionObserver((entries) => {
-  let visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (!visible) return;
-  document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
-  if (tabMap[visible.target.id]) tabMap[visible.target.id].classList.add('active');
-}, { threshold: 0.3 });
-sectionIds.map(id => document.getElementById(id)).filter(Boolean).forEach(s => navObserver.observe(s));
-
-// 초기 실행
-document.addEventListener("DOMContentLoaded", renderAll);
+loadFlyer();
 </script>
+
 </body>
 </html>

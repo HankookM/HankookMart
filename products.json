@@ -1,0 +1,116 @@
+{
+  "store": {
+    "name": "비전마트 한국점",
+    "title": "💥 주말 미친 세일 💥",
+    "subtitle": "1월 28일 단 하루! 선착순 판매",
+    "period": "1/1(수) ~ 1/31(금)",
+    "phone": "02-1234-5678",
+    "footer_note": "※ 조기 품절될 수 있습니다."
+  },
+  "sections": [
+    {
+      "id": "top",
+      "title": "🔝 오늘의 추천 상품",
+      "layout": "list",
+      "tab_label": "전체상품",
+      "products": [
+        {
+          "name": "꿀맛 부사 사과 (1봉)",
+          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
+          "old_price": "15,000원",
+          "price": "9,900원",
+          "badge": { "text": "NEW", "type": "new", "anim": "pulse" }
+        },
+        {
+          "name": "꿀맛 부사 사과 (1봉)",
+          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
+          "old_price": "15,000원",
+          "price": "9,900원"
+        },
+        {
+          "name": "꿀맛 부사 사과 (1봉)",
+          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
+          "old_price": "15,000원",
+          "price": "9,900원"
+        }
+      ]
+    },
+    {
+      "id": "meat",
+      "title": "🥩 정육코너 특가",
+      "layout": "grid",
+      "tab_label": "정육코너",
+      "products": [
+        {
+          "name": "국내산 생삼겹살1 (600g)",
+          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
+          "old_price": "22,000원",
+          "price": "14,500원",
+          "badge": { "text": "데-박", "type": "limit", "anim": "blink" }
+        },
+        {
+          "name": "국내산 생삼겹살2 (600g)",
+          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
+          "old_price": "22,000원",
+          "price": "14,500원",
+          "badge": { "text": "쪼야요", "type": "limit", "anim": "blink" }
+        },
+        {
+          "name": "국내산 생삼겹살3 (600g)",
+          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
+          "old_price": "22,000원",
+          "price": "14,500원",
+          "badge": { "text": "맛잇숴요", "type": "limit", "anim": "blink" }
+        },
+        {
+          "name": "국내산 생삼겹살4 (600g)",
+          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
+          "old_price": "22,000원",
+          "price": "14,500원"
+        },
+        {
+          "name": "국내산 생삼겹살5 (600g)",
+          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
+          "old_price": "22,000원",
+          "price": "14,500원"
+        },
+        {
+          "name": "국내산 생삼겹살6 (600g)",
+          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
+          "old_price": "22,000원",
+          "price": "14,500원"
+        }
+      ]
+    },
+    {
+      "id": "fruit",
+      "title": "🍇 과일코너 특가",
+      "layout": "grid",
+      "tab_label": "과일코너",
+      "products": [
+        {
+          "name": "샤인머스캣(냉장)",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaacYwZp6DRMNksZPKjGDR-sZEnKj_dWCZF7Ngj6nJBGpEKMkF0aBi-hTN91UlPBfja-Rb5k8BrbCfh4QX12zBvvt7d4pbNFZuQxM4nIS&s=10",
+          "old_price": "25,000원",
+          "price": "19,800",
+          "unit": "원/100g",
+          "badge": { "text": "개꿀맛도리", "type": "limit", "anim": "blink" }
+        },
+        {
+          "name": "샤인머스캣(냉장)",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaacYwZp6DRMNksZPKjGDR-sZEnKj_dWCZF7Ngj6nJBGpEKMkF0aBi-hTN91UlPBfja-Rb5k8BrbCfh4QX12zBvvt7d4pbNFZuQxM4nIS&s=10",
+          "old_price": "25,000원",
+          "price": "19,800",
+          "unit": "원/100g"
+        },
+        {
+          "name": "샤인머스캣(냉장)",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaacYwZp6DRMNksZPKjGDR-sZEnKj_dWCZF7Ngj6nJBGpEKMkF0aBi-hTN91UlPBfja-Rb5k8BrbCfh4QX12zBvvt7d4pbNFZuQxM4nIS&s=10",
+          "old_price": "25,000원",
+          "price": "19,800",
+          "unit": "원/100g"
+        }
+      ]
+    }
+  ]
+}
