@@ -15,27 +15,40 @@
       "tab_label": "인기상품",
       "products": [
         {
-          "name": "꿀맛 부사 사과 (1봉)",
-          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
+          "name": "산지직송 제철 성주 참외",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/koreamelon.jpg?raw=true",
+          "price": "9,800원",
           "old_price": "15,000원",
-          "price": "9,900원",
+          "unit": "1봉",
           "badge": {
-            "text": "NEW",
-            "type": "new",
+            "text": "HOT",
+            "type": "limit",
+            "anim": "blink"
+          }
+        },
+        {
+          "name": "꿀맛 안동 사과 (부사)",
+          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
+          "price": "14,800원",
+          "old_price": "19,800원",
+          "unit": "5개/봉",
+          "badge": {
+            "text": "맛있어요",
+            "type": "limit",
             "anim": "pulse"
           }
         },
         {
-          "name": "꿀맛 부사 사과 (1봉)",
-          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
-          "old_price": "15,000원",
-          "price": "9,900원"
-        },
-        {
-          "name": "꿀맛 부사 사과 (1봉)",
-          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
-          "old_price": "15,000원",
-          "price": "9,900원"
+          "name": "비포오이",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/bipocucumber.jpg?raw=true",
+          "price": "9,900",
+          "old_price": "15,800",
+          "unit": "50개/포",
+          "badge": {
+            "text": "특가세일",
+            "type": "limit",
+            "anim": "blink"
+          }
         }
       ]
     },
@@ -46,10 +59,11 @@
       "tab_label": "정육코너",
       "products": [
         {
-          "name": "국내산 생삼겹살1 (600g)",
-          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
-          "old_price": "22,000원",
-          "price": "14,500원",
+          "name": "한우 국거리",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/gukgeori.jpg?raw=true",
+          "price": "9,900원",
+          "old_price": "15,800원",
+          "unit": "1팩",
           "badge": {
             "text": "데-박",
             "type": "limit",
@@ -92,40 +106,65 @@
           "price": "44,800",
           "old_price": "59,800",
           "unit": "10kg"
-        }
-      ]
-    },
-    {
-      "id": "fruit",
-      "title": "🍇 과일코너 특가",
-      "layout": "grid",
-      "tab_label": "과일코너",
-      "products": [
+        },
         {
-          "name": "샤인머스캣(냉장)",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaacYwZp6DRMNksZPKjGDR-sZEnKj_dWCZF7Ngj6nJBGpEKMkF0aBi-hTN91UlPBfja-Rb5k8BrbCfh4QX12zBvvt7d4pbNFZuQxM4nIS&s=10",
-          "old_price": "25,000원",
-          "price": "19,800",
-          "unit": "원/100g",
+          "name": "찰기가득 햇반",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/hatban.jpg?raw=true",
+          "price": "9,900원",
+          "old_price": "12,800원",
+          "unit": "12입/박스"
+        },
+        {
+          "name": "아이스크림(바)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/icebar.jpg?raw=true",
+          "price": "4,980원",
+          "old_price": "6,000원",
+          "unit": "10개",
           "badge": {
-            "text": "개꿀맛도리",
+            "text": "HOT",
             "type": "limit",
             "anim": "blink"
           }
         },
         {
-          "name": "샤인머스캣(냉장)",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaacYwZp6DRMNksZPKjGDR-sZEnKj_dWCZF7Ngj6nJBGpEKMkF0aBi-hTN91UlPBfja-Rb5k8BrbCfh4QX12zBvvt7d4pbNFZuQxM4nIS&s=10",
-          "old_price": "25,000원",
-          "price": "19,800",
-          "unit": "원/100g"
+          "name": "아이스크림(콘,빵,설레임)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/icecorn.jpg?raw=true",
+          "price": "6,480원",
+          "old_price": "7,000원",
+          "unit": "5개",
+          "badge": {
+            "text": "HOT",
+            "type": "limit",
+            "anim": "blink"
+          }
         },
         {
-          "name": "샤인머스캣(냉장)",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaacYwZp6DRMNksZPKjGDR-sZEnKj_dWCZF7Ngj6nJBGpEKMkF0aBi-hTN91UlPBfja-Rb5k8BrbCfh4QX12zBvvt7d4pbNFZuQxM4nIS&s=10",
-          "old_price": "25,000원",
-          "price": "19,800",
-          "unit": "원/100g"
+          "name": "해태 오예스",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/oyes.jpg?raw=true",
+          "price": "5,980",
+          "old_price": "7,980",
+          "unit": "16+2입"
+        },
+        {
+          "name": "오리온 초코칩 쿠키 2번들",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/onrionchocochip.jpg?raw=true",
+          "price": "4,980원",
+          "old_price": "6,900원",
+          "unit": "256g*2"
+        },
+        {
+          "name": "오리온 고소미",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/gosomi.jpg?raw=true",
+          "price": "5,980",
+          "old_price": "7,900",
+          "unit": "16입"
+        },
+        {
+          "name": "롯데 마가레트 실속형",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/lottemagalet.jpg?raw=true",
+          "price": "7,980원",
+          "old_price": "9,600원",
+          "unit": "16입"
         }
       ]
     }
