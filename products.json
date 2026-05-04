@@ -69,28 +69,6 @@
             "type": "limit",
             "anim": "blink"
           }
-        },
-        {
-          "name": "국내산 생삼겹살2 (600g)",
-          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
-          "old_price": "22,000원",
-          "price": "14,500원",
-          "badge": {
-            "text": "쪼야요",
-            "type": "limit",
-            "anim": "blink"
-          }
-        },
-        {
-          "name": "국내산 생삼겹살3 (600g)",
-          "image": "https://m.meatshare.co.kr/web/product/big/202304/48fab22981ca9aff6f1cb2e96b0c53fc.jpg",
-          "old_price": "22,000원",
-          "price": "14,500원",
-          "badge": {
-            "text": "맛잇숴요",
-            "type": "limit",
-            "anim": "blink"
-          }
         }
       ]
     },
