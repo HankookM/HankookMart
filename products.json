@@ -37,18 +37,6 @@
             "type": "limit",
             "anim": "pulse"
           }
-        },
-        {
-          "name": "비포오이",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/bipocucumber.jpg?raw=true",
-          "price": "9,900",
-          "old_price": "15,800",
-          "unit": "50개/포",
-          "badge": {
-            "text": "특가세일",
-            "type": "limit",
-            "anim": "blink"
-          }
         }
       ]
     },
