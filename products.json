@@ -65,6 +65,18 @@
             "type": "limit",
             "anim": "blink"
           }
+        },
+        {
+          "name": "한돈 생 앞다리살",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EC%95%9E%EB%8B%A4%EB%A6%AC.webp?raw=true",
+          "price": "6,980원",
+          "old_price": "10,800원",
+          "unit": "600g/근",
+          "badge": {
+            "text": "특-가",
+            "type": "limit",
+            "anim": "blink"
+          }
         }
       ]
     },
@@ -77,7 +89,7 @@
         {
           "name": "슈퍼오닝",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/superoning.jpg?raw=true",
-          "price": "44,800",
+          "price": "44,800원",
           "old_price": "59,800",
           "unit": "10kg"
         },
