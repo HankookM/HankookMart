@@ -107,9 +107,38 @@
             .product-name { font-size: 18px; }
         }
 
+        .unit { color: #666; font-size: 14px; font-weight: 500; margin-bottom: 4px; }
         .old-price { text-decoration: line-through; color: #999; font-size: 14px; }
         .price { color: #d32f2f; font-size: 28px; font-weight: 900; }
-        .price .unit { font-size: 14px; font-weight: 500; }
+
+        /* 품절 */
+        .sold-out-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.45);
+            z-index: 3;
+        }
+        .sold-out-overlay span {
+            background: #424242;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            padding: 6px 16px;
+            border-radius: 4px;
+            transform: rotate(-8deg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+        }
+        .product-item.sold-out .product-img-wrap { border-color: #9e9e9e; }
+        .product-item.sold-out .product-img { filter: grayscale(100%); opacity: 0.7; }
+        .product-item.sold-out .product-name,
+        .product-item.sold-out .unit,
+        .product-item.sold-out .old-price,
+        .product-item.sold-out .price { opacity: 0.45; }
+        .product-grid .sold-out-overlay span { font-size: 14px; letter-spacing: 2px; padding: 4px 10px; }
 
         .footer {
             background-color: #eee;
@@ -250,18 +279,21 @@ function renderBadge(badge) {
 }
 
 function renderProduct(p) {
-    const badge = renderBadge(p.badge);
-    const oldPrice = p.old_price ? `<span class="old-price">${escapeHtml(p.old_price)}</span>` : '';
-    const unit = p.unit ? `<span class="unit">${escapeHtml(p.unit)}</span>` : '';
+    const soldOut = p.sold_out === true;
+    // 품절이면 기존 뱃지 대신 품절 표시를 우선 노출
+    const badge = soldOut ? '<div class="sold-out-overlay"><span>품절</span></div>' : renderBadge(p.badge);
+    const unit = p.unit ? `<div class="unit">${escapeHtml(p.unit)}</div>` : '';
+    const oldPrice = p.old_price ? `<div class="old-price">${escapeHtml(p.old_price)}</div>` : '';
     return `
-        <div class="product-item scroll-fade">
+        <div class="product-item scroll-fade${soldOut ? ' sold-out' : ''}">
             <div class="product-img-wrap">
                 <img src="${escapeHtml(p.image)}" class="product-img" loading="lazy" alt="${escapeHtml(p.name)}">
                 ${badge}
             </div>
             <div class="product-name">${escapeHtml(p.name)}</div>
+            ${unit}
             ${oldPrice}
-            <div class="price">${escapeHtml(p.price)}${unit}</div>
+            <div class="price">${escapeHtml(p.price)}</div>
         </div>
     `;
 }
