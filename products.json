@@ -32,7 +32,6 @@
           "price": "14,800원",
           "old_price": "19,800원",
           "unit": "5개/봉",
-          "sold_out": true,
           "badge": {
             "text": "맛있어요",
             "type": "limit",
@@ -84,8 +83,8 @@
         {
           "name": "찰기가득 햇반",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/hatban.jpg?raw=true",
-          "price": "9,900원",
-          "old_price": "12,800원",
+          "price": "11,900",
+          "old_price": "14,800원",
           "unit": "12입/박스"
         },
         {
