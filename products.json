@@ -32,6 +32,7 @@
           "price": "14,800원",
           "old_price": "19,800원",
           "unit": "5개/봉",
+          "sold_out": true,
           "badge": {
             "text": "맛있어요",
             "type": "limit",
