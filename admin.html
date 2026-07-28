@@ -294,6 +294,106 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
     color: var(--muted);
     margin-top: 4px;
 }
+
+/* 체크박스 라벨 */
+.check-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+.check-label input { width: auto; margin: 0; }
+
+/* 사진 업로드 */
+.upload-box {
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    background: #fafafa;
+}
+.upload-box input[type=file] { font-size: 13px; }
+.upload-status {
+    display: none;
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    word-break: break-all;
+}
+.upload-status.show { display: block; }
+.upload-status.loading { background: #e3f2fd; color: #1565c0; }
+.upload-status.success { background: #e8f5e9; color: #2e7d32; }
+.upload-status.error { background: #ffebee; color: var(--primary-dark); }
+.upload-status.info { background: #f5f5f5; color: #555; }
+
+/* 사진 검색 모달 */
+.picker-bg { z-index: 150; }
+.picker-modal { max-width: 720px; }
+.picker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+    max-height: 55vh;
+    overflow-y: auto;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fafafa;
+}
+.picker-item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #fff;
+    padding: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s;
+}
+.picker-item:hover { border-color: var(--primary); transform: scale(1.03); }
+.picker-item img {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    display: block;
+    background: #fff;
+}
+.picker-name {
+    font-size: 11px;
+    color: #555;
+    margin-top: 4px;
+    text-align: center;
+    word-break: break-all;
+}
+.picker-empty {
+    grid-column: 1/-1;
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 10px;
+    font-size: 13px;
+}
+
+/* 품절 표시 (관리자 카드) */
+.product-card .punit { color: #666; font-size: 12px; }
+.product-card .psoldout {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    padding: 2px 6px;
+    background: #424242;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    z-index: 3;
+}
+.product-card.sold-out .img-wrap { border-color: #9e9e9e; }
+.product-card.sold-out .img-wrap img { filter: grayscale(100%); opacity: 0.6; }
+.product-card.sold-out .pname,
+.product-card.sold-out .punit,
+.product-card.sold-out .pold,
+.product-card.sold-out .pprice { opacity: 0.5; }
 </style>
 </head>
 <body>
@@ -400,7 +500,7 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
     <div class="card">
         <h2>💾 저장 및 배포</h2>
         <div class="actions">
-            <button class="btn-success" onclick="saveToGithub()" style="font-size: 16px; padding: 12px 24px;">
+            <button class="btn-success" onclick="saveProductsJsonToGitHub()" style="font-size: 16px; padding: 12px 24px;">
                 🚀 GitHub에 저장 (즉시 배포)
             </button>
             <button class="btn-secondary" onclick="exportJson()">JSON 다운로드</button>
@@ -463,6 +563,30 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
             <input type="text" id="p-image" oninput="updateImagePreview()">
             <img id="p-image-preview" style="width:100%; max-height:140px; object-fit:contain; margin-top:6px; border-radius:4px; display:none; background:#fafafa; border:1px solid #eee;">
         </div>
+        <div class="field upload-box">
+            <label>사진 올리기 (자동으로 300x300 webp 변환 후 저장소에 업로드)</label>
+            <input type="file" id="p-image-file" accept="image/*" onchange="handleImageFileSelected(event)">
+            <div class="row" style="margin-top: 8px;">
+                <div>
+                    <label>저장 폴더</label>
+                    <input type="text" id="p-image-dir" placeholder="resource/products">
+                </div>
+                <div>
+                    <label>파일명 (같은 이름이면 덮어쓰기)</label>
+                    <input type="text" id="p-image-filename" placeholder="예: koreamelon.webp">
+                </div>
+            </div>
+            <div class="actions" style="margin-top: 8px;">
+                <button class="btn-warning btn-small" onclick="uploadSelectedImage()">⬆️ GitHub에 업로드</button>
+                <button class="btn-secondary btn-small" onclick="openImagePicker()">🔍 기존 사진 검색</button>
+            </div>
+            <div id="upload-status" class="upload-status"></div>
+        </div>
+        <div class="field">
+            <label>규격 (선택)</label>
+            <input type="text" id="p-unit" placeholder="예: 1봉 / 500g / 10입">
+            <div class="help-text">상품명 바로 아래에 표시됩니다. (예: 1봉, 12입/박스)</div>
+        </div>
         <div class="row">
             <div class="field">
                 <label>원래 가격 (취소선)</label>
@@ -474,8 +598,9 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
             </div>
         </div>
         <div class="field">
-            <label>가격 단위 (선택)</label>
-            <input type="text" id="p-unit" placeholder="예: 원/100g">
+            <label class="check-label">
+                <input type="checkbox" id="p-sold-out"> 품절 (체크하면 전단지에 '품절' 표시)
+            </label>
         </div>
         <h3 style="margin-top:20px; font-size:14px;">뱃지 (선택)</h3>
         <div class="field">
@@ -506,6 +631,21 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
     </div>
 </div>
 
+<!-- 기존 사진 검색 모달 -->
+<div class="modal-bg picker-bg" id="image-picker-modal" onclick="if(event.target===this)closeImagePicker()">
+    <div class="modal picker-modal">
+        <h3>🔍 기존 사진 검색</h3>
+        <div class="field">
+            <input type="text" id="img-search" placeholder="파일명 검색 (예: melon, ramen)" oninput="filterImagePicker()">
+            <div class="help-text"><span id="image-picker-count"></span> · 썸네일을 클릭하면 이미지 URL이 반영됩니다.</div>
+        </div>
+        <div id="image-picker-grid" class="picker-grid"></div>
+        <div class="actions">
+            <button class="btn-secondary" onclick="closeImagePicker()">닫기</button>
+        </div>
+    </div>
+</div>
+
 <!-- 토스트 -->
 <div class="toast" id="toast"></div>
 
@@ -514,10 +654,32 @@ summary { cursor: pointer; font-weight: 600; color: #555; padding: 6px 0; }
 // 전단지 관리자 - 핵심 로직
 // ============================================================
 
+// ---- GitHub 연결 기본값 (한 곳에서 관리) ----
+// ⚠️ 보안 안내: GITHUB_TOKEN 은 비워둔 채로 두는 것을 권장합니다.
+//    화면 상단 [🔧 GitHub 연결 설정]에 토큰을 입력하면 본인 브라우저의
+//    localStorage 에만 저장되고 이 파일에는 기록되지 않습니다.
+//    admin.html 을 내 컴퓨터에서만 열어 쓰는 경우에만 아래에 값을 직접
+//    채워 넣으세요. 토큰이 적힌 admin.html 을 GitHub Pages 등 공개된
+//    곳에 올리면 누구나 토큰을 볼 수 있어 저장소가 탈취될 수 있습니다.
+const GITHUB_TOKEN = '';   // 예: 'ghp_xxxxxxxxxxxxxxxxxxxx' (비워두면 설정 화면에서 입력)
+const GITHUB_OWNER = '';   // 예: 'HankookM'
+const GITHUB_REPO = '';    // 예: 'HankookMart'
+const GITHUB_BRANCH = 'main';
+const PRODUCTS_JSON_PATH = 'products.json';
+
+// ---- 이미지 업로드 기본값 ----
+const IMAGE_UPLOAD_DIR = 'resource/products'; // 업로드된 사진이 저장될 폴더
+const IMAGE_SEARCH_DIR = 'resource';          // [기존 사진 검색]이 훑어볼 폴더
+const IMAGE_SIZE = 300;                       // 정사각 리사이즈 크기(px)
+const IMAGE_WEBP_QUALITY = 0.85;              // webp 압축 품질(0~1)
+const IMAGE_EXT_RE = /\.(webp|png|jpe?g|gif|avif|svg)$/i;
+
 let DATA = { store: {}, sections: [] };
 let editing = { sectionIndex: null, productIndex: null };
 let sectionEditing = { index: null, layout: 'list' };
 let dragState = { type: null, fromSection: null, fromIndex: null, sectionIndex: null };
+let pendingImage = null;  // { blob, name } 변환은 끝났고 업로드 대기 중인 사진
+let imageLibrary = [];    // 저장소에서 불러온 사진 목록 (검색용 캐시)
 
 const STORAGE_KEY = 'jmart_admin_config';
 const DATA_CACHE_KEY = 'jmart_admin_data';
@@ -545,22 +707,66 @@ function saveGithubConfig() {
 }
 
 function loadGithubConfig() {
+    let saved = {};
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    try {
-        const cfg = JSON.parse(raw);
-        document.getElementById('gh-owner').value = cfg.owner || '';
-        document.getElementById('gh-repo').value = cfg.repo || '';
-        document.getElementById('gh-branch').value = cfg.branch || 'main';
-        document.getElementById('gh-path').value = cfg.path || 'products.json';
-        document.getElementById('gh-token').value = cfg.token || '';
-        return cfg;
-    } catch (e) { return null; }
+    if (raw) {
+        try { saved = JSON.parse(raw) || {}; } catch (e) { saved = {}; }
+    }
+    // localStorage 값이 없으면 파일 상단 상수를 기본값으로 사용
+    const cfg = {
+        owner: saved.owner || GITHUB_OWNER,
+        repo: saved.repo || GITHUB_REPO,
+        branch: saved.branch || GITHUB_BRANCH,
+        path: saved.path || PRODUCTS_JSON_PATH,
+        token: saved.token || GITHUB_TOKEN
+    };
+    document.getElementById('gh-owner').value = cfg.owner;
+    document.getElementById('gh-repo').value = cfg.repo;
+    document.getElementById('gh-branch').value = cfg.branch;
+    document.getElementById('gh-path').value = cfg.path;
+    document.getElementById('gh-token').value = cfg.token;
+    return cfg;
+}
+
+// ---- GitHub API 공통 ----
+function encodeGithubPath(path) {
+    return path.split('/').map(encodeURIComponent).join('/');
+}
+
+// 전단지 데이터에서 쓰는 이미지 URL 형식 (기존 products.json과 동일)
+function githubRawUrl(cfg, path) {
+    return `https://github.com/${cfg.owner}/${cfg.repo}/blob/${cfg.branch}/${encodeGithubPath(path)}?raw=true`;
+}
+
+function githubRequest(cfg, endpoint, options = {}) {
+    return fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${endpoint}`, {
+        ...options,
+        headers: {
+            Authorization: 'token ' + cfg.token,
+            Accept: 'application/vnd.github+json',
+            ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+            ...(options.headers || {})
+        }
+    });
+}
+
+async function githubError(res) {
+    const err = await res.json().catch(() => ({}));
+    return new Error((err.message || res.statusText) + ' (' + res.status + ')');
+}
+
+// 파일이 이미 있으면 sha, 없으면 null (덮어쓰기 여부 판단용)
+async function fetchGitHubFileSha(cfg, path) {
+    const res = await githubRequest(cfg, `/contents/${encodeGithubPath(path)}?ref=${encodeURIComponent(cfg.branch)}`);
+    if (res.status === 404) return null;
+    if (!res.ok) throw await githubError(res);
+    const file = await res.json();
+    return file.sha;
 }
 
 function getConfig() {
     const cfg = loadGithubConfig();
-    if (!cfg || !cfg.owner || !cfg.repo || !cfg.token) {
+    if (!cfg.owner || !cfg.repo || !cfg.token) {
         toast('GitHub 연결 설정을 먼저 완료해주세요', 'error');
         document.getElementById('github-config').open = true;
         return null;
@@ -571,7 +777,7 @@ function getConfig() {
 function updateStatusBar() {
     const cfg = loadGithubConfig();
     const bar = document.getElementById('status-bar');
-    if (cfg && cfg.owner && cfg.repo && cfg.token) {
+    if (cfg.owner && cfg.repo && cfg.token) {
         bar.className = 'status-bar connected';
         bar.innerHTML = `✅ 연결됨: <strong>${cfg.owner}/${cfg.repo}</strong> (${cfg.branch}) - <code>${cfg.path}</code>`;
     } else {
@@ -584,10 +790,7 @@ async function testConnection() {
     const cfg = getConfig();
     if (!cfg) return;
     try {
-        const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}`;
-        const res = await fetch(url, {
-            headers: { Authorization: 'token ' + cfg.token, Accept: 'application/vnd.github+json' }
-        });
+        const res = await githubRequest(cfg, '');
         if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
         const repo = await res.json();
         toast(`✅ 연결 성공: ${repo.full_name}`, 'success');
@@ -601,20 +804,14 @@ async function loadFromGithub() {
     const cfg = getConfig();
     if (!cfg) return;
     try {
-        const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}?ref=${cfg.branch}`;
-        const res = await fetch(url, {
-            headers: { Authorization: 'token ' + cfg.token, Accept: 'application/vnd.github+json' }
-        });
+        const res = await githubRequest(cfg, `/contents/${encodeGithubPath(cfg.path)}?ref=${encodeURIComponent(cfg.branch)}`);
         if (res.status === 404) {
             // 파일이 아직 저장소에 없음 → 첫 저장으로 자동 생성됨
             window.__lastSha = null;
             toast('ℹ️ 저장소에 ' + cfg.path + ' 파일이 아직 없습니다. [GitHub에 저장]을 누르면 새로 생성됩니다.', 'info');
             return;
         }
-        if (!res.ok) {
-            const err = await res.json().catch(() => ({}));
-            throw new Error((err.message || res.statusText) + ' (' + res.status + ')');
-        }
+        if (!res.ok) throw await githubError(res);
         const file = await res.json();
         // base64 디코딩 (UTF-8)
         const content = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
@@ -627,53 +824,32 @@ async function loadFromGithub() {
     }
 }
 
-async function saveToGithub() {
+async function saveProductsJsonToGitHub() {
     const cfg = getConfig();
     if (!cfg) return;
     pullStoreFromForm();
     if (!confirm('GitHub에 저장하시겠습니까? 전단지 페이지에 바로 반영됩니다.')) return;
 
     try {
-        // 1) 현재 SHA 가져오기 (파일이 이미 존재하는 경우)
-        const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}?ref=${cfg.branch}`;
-        let sha = window.__lastSha;
-        try {
-            const r = await fetch(url, {
-                headers: { Authorization: 'token ' + cfg.token, Accept: 'application/vnd.github+json' }
-            });
-            if (r.ok) {
-                const f = await r.json();
-                sha = f.sha;
-            } else if (r.status === 404) {
-                // 파일이 없음 → 새로 생성 (sha 없이 PUT)
-                sha = null;
-            }
-        } catch (e) {}
+        // 1) 현재 SHA 가져오기 (파일이 없으면 null → 새로 생성)
+        const sha = await fetchGitHubFileSha(cfg, cfg.path);
 
         // 2) 업로드 (UTF-8 base64 인코딩)
+        // DATA.sections / products 배열 순서가 그대로 저장되므로
+        // 드래그로 바꾼 순서가 전단지에도 동일하게 반영됩니다.
         const json = JSON.stringify(DATA, null, 2);
-        const content = btoa(unescape(encodeURIComponent(json)));
         const body = {
             message: `update products: ${new Date().toISOString()}`,
-            content: content,
+            content: btoa(unescape(encodeURIComponent(json))),
             branch: cfg.branch
         };
         if (sha) body.sha = sha;
 
-        const putUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`;
-        const res = await fetch(putUrl, {
+        const res = await githubRequest(cfg, `/contents/${encodeGithubPath(cfg.path)}`, {
             method: 'PUT',
-            headers: {
-                Authorization: 'token ' + cfg.token,
-                Accept: 'application/vnd.github+json',
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(body)
         });
-        if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.message || res.statusText);
-        }
+        if (!res.ok) throw await githubError(res);
         const result = await res.json();
         window.__lastSha = result.content.sha;
         localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(DATA));
@@ -681,6 +857,218 @@ async function saveToGithub() {
     } catch (e) {
         toast('저장 실패: ' + e.message, 'error');
     }
+}
+
+// ============================================================
+// 사진 업로드 (300x300 webp 변환 → GitHub resource 폴더)
+// ============================================================
+
+// 선택한 사진을 300x300 정사각 캔버스에 비율 유지로 그린 뒤 webp Blob 으로 변환
+function resizeAndConvertToWebp(file, size = IMAGE_SIZE, quality = IMAGE_WEBP_QUALITY) {
+    return new Promise((resolve, reject) => {
+        const objectUrl = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+            URL.revokeObjectURL(objectUrl);
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, size, size);
+            // 전단지 카드가 object-fit:contain 이므로 잘리지 않게 비율 유지 + 가운데 정렬
+            const scale = Math.min(size / img.width, size / img.height);
+            const w = Math.round(img.width * scale);
+            const h = Math.round(img.height * scale);
+            ctx.drawImage(img, Math.round((size - w) / 2), Math.round((size - h) / 2), w, h);
+            canvas.toBlob(blob => {
+                if (!blob) { reject(new Error('이미지 변환에 실패했습니다')); return; }
+                if (blob.type !== 'image/webp') {
+                    reject(new Error('이 브라우저는 webp 변환을 지원하지 않습니다. Chrome 또는 Edge에서 시도해주세요.'));
+                    return;
+                }
+                resolve(blob);
+            }, 'image/webp', quality);
+        };
+        img.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            reject(new Error('이미지 파일을 읽을 수 없습니다'));
+        };
+        img.src = objectUrl;
+    });
+}
+
+function blobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(',')[1]);
+        reader.onerror = () => reject(new Error('파일 인코딩에 실패했습니다'));
+        reader.readAsDataURL(blob);
+    });
+}
+
+// sha 가 있으면 기존 파일 덮어쓰기, 없으면 새 파일 생성
+async function uploadImageToGitHub(cfg, path, blob, sha) {
+    const body = {
+        message: `upload image: ${path}`,
+        content: await blobToBase64(blob),
+        branch: cfg.branch
+    };
+    if (sha) body.sha = sha;
+
+    const res = await githubRequest(cfg, `/contents/${encodeGithubPath(path)}`, {
+        method: 'PUT',
+        body: JSON.stringify(body)
+    });
+    if (!res.ok) throw await githubError(res);
+    await res.json();
+    return githubRawUrl(cfg, path);
+}
+
+function setUploadStatus(msg, type = 'info') {
+    const el = document.getElementById('upload-status');
+    el.textContent = msg || '';
+    el.className = 'upload-status' + (msg ? ' show ' + type : '');
+}
+
+function toWebpFileName(name) {
+    const base = (name || '').replace(/\.[^.]+$/, '').trim().toLowerCase()
+        .replace(/[^a-z0-9가-힣._-]+/g, '-').replace(/^-+|-+$/g, '');
+    return (base || 'image-' + Date.now()) + '.webp';
+}
+
+async function handleImageFileSelected(ev) {
+    const file = ev.target.files[0];
+    if (!file) return;
+    pendingImage = null;
+    setUploadStatus('⏳ 300x300 webp로 변환 중...', 'loading');
+    try {
+        const blob = await resizeAndConvertToWebp(file);
+        pendingImage = { blob, name: file.name };
+        document.getElementById('p-image-filename').value = toWebpFileName(file.name);
+        const preview = document.getElementById('p-image-preview');
+        preview.src = URL.createObjectURL(blob);
+        preview.style.display = 'block';
+        setUploadStatus(`✅ 변환 완료 (${Math.round(blob.size / 1024)}KB) → [GitHub에 업로드]를 눌러주세요.`, 'success');
+    } catch (e) {
+        setUploadStatus('❌ 변환 실패: ' + e.message, 'error');
+    }
+}
+
+async function uploadSelectedImage() {
+    if (!pendingImage) {
+        setUploadStatus('❌ 먼저 사진 파일을 선택해주세요.', 'error');
+        return;
+    }
+    const cfg = getConfig();
+    if (!cfg) return;
+
+    const dir = (document.getElementById('p-image-dir').value.trim() || IMAGE_UPLOAD_DIR).replace(/^\/+|\/+$/g, '');
+    const fileName = toWebpFileName(document.getElementById('p-image-filename').value.trim() || pendingImage.name);
+    document.getElementById('p-image-filename').value = fileName;
+    const path = dir + '/' + fileName;
+
+    setUploadStatus('⏳ 업로드 중... (' + path + ')', 'loading');
+    try {
+        const sha = await fetchGitHubFileSha(cfg, path);
+        if (sha && !confirm(`${path} 파일이 이미 있습니다. 덮어쓸까요?`)) {
+            setUploadStatus('업로드를 취소했습니다. 파일명을 바꿔서 다시 시도해주세요.', 'info');
+            return;
+        }
+        const url = await uploadImageToGitHub(cfg, path, pendingImage.blob, sha);
+        document.getElementById('p-image').value = url;
+        updateImagePreview();
+        imageLibrary = []; // 사진 목록 캐시 무효화
+        setUploadStatus(`✅ 업로드 완료${sha ? ' (기존 파일 덮어씀)' : ''} → 이미지 URL이 반영되었습니다.`, 'success');
+        toast('사진 업로드 완료', 'success');
+    } catch (e) {
+        setUploadStatus('❌ 업로드 실패: ' + e.message, 'error');
+    }
+}
+
+// ============================================================
+// 기존 사진 검색 (저장소 resource 폴더 탐색)
+// ============================================================
+
+// Contents API로 폴더를 재귀 탐색해 이미지 파일 목록을 만든다
+async function fetchGitHubImages(cfg, dir = IMAGE_SEARCH_DIR, depth = 4) {
+    const res = await githubRequest(cfg, `/contents/${encodeGithubPath(dir)}?ref=${encodeURIComponent(cfg.branch)}`);
+    if (res.status === 404) return [];
+    if (!res.ok) throw await githubError(res);
+    const items = await res.json();
+    if (!Array.isArray(items)) return [];
+
+    const files = [];
+    const subDirs = [];
+    items.forEach(item => {
+        if (item.type === 'file' && IMAGE_EXT_RE.test(item.name)) {
+            files.push({ name: item.name, path: item.path, url: githubRawUrl(cfg, item.path) });
+        } else if (item.type === 'dir' && depth > 1) {
+            subDirs.push(item.path);
+        }
+    });
+    const nested = await Promise.all(subDirs.map(d => fetchGitHubImages(cfg, d, depth - 1)));
+    return files.concat(...nested);
+}
+
+function renderImagePickerModal(images = imageLibrary, keyword = '') {
+    const grid = document.getElementById('image-picker-grid');
+    const q = keyword.trim().toLowerCase();
+    const list = q ? images.filter(img => img.path.toLowerCase().includes(q)) : images;
+
+    document.getElementById('image-picker-count').textContent =
+        `${list.length}개 / 전체 ${images.length}개`;
+
+    if (!list.length) {
+        grid.innerHTML = '<div class="picker-empty">검색 결과가 없습니다.</div>';
+        return;
+    }
+    grid.innerHTML = list.map(img => `
+        <div class="picker-item" title="${escapeHtml(img.path)}" data-url="${escapeHtml(img.url)}">
+            <img src="${escapeHtml(img.url)}" loading="lazy" alt="${escapeHtml(img.name)}">
+            <div class="picker-name">${escapeHtml(img.name)}</div>
+        </div>
+    `).join('');
+    grid.querySelectorAll('.picker-item').forEach(el => {
+        el.addEventListener('click', () => pickImage(el.dataset.url));
+    });
+}
+
+async function openImagePicker() {
+    const cfg = getConfig();
+    if (!cfg) return;
+    document.getElementById('img-search').value = '';
+    document.getElementById('image-picker-modal').classList.add('show');
+
+    if (imageLibrary.length) {
+        renderImagePickerModal();
+        return;
+    }
+    document.getElementById('image-picker-grid').innerHTML =
+        '<div class="picker-empty">⏳ 저장소에서 사진 목록을 불러오는 중...</div>';
+    try {
+        imageLibrary = await fetchGitHubImages(cfg);
+        imageLibrary.sort((a, b) => a.path.localeCompare(b.path));
+        renderImagePickerModal();
+    } catch (e) {
+        document.getElementById('image-picker-grid').innerHTML =
+            '<div class="picker-empty">❌ 목록을 불러오지 못했습니다: ' + escapeHtml(e.message) + '</div>';
+    }
+}
+
+function closeImagePicker() {
+    document.getElementById('image-picker-modal').classList.remove('show');
+}
+
+function filterImagePicker() {
+    renderImagePickerModal(imageLibrary, document.getElementById('img-search').value);
+}
+
+function pickImage(url) {
+    document.getElementById('p-image').value = url;
+    updateImagePreview();
+    closeImagePicker();
+    setUploadStatus('✅ 기존 사진을 선택했습니다.', 'success');
 }
 
 // ---- 데이터 → 화면 ----
@@ -731,21 +1119,27 @@ function renderSections() {
         `;
         container.appendChild(div);
     });
-    attachDragHandlers();
+    enableProductDragSort(container);
+    enableSectionDragSort(container);
 }
 
 function productCardHtml(p, sIdx, pIdx) {
+    const soldOut = p.sold_out === true;
     const badge = p.badge && p.badge.text ? `<span class="pbadge">${escapeHtml(p.badge.text)}</span>` : '';
+    const soldOutBadge = soldOut ? '<span class="psoldout">품절</span>' : '';
+    const unit = p.unit ? `<div class="punit">${escapeHtml(p.unit)}</div>` : '';
     const oldPrice = p.old_price ? `<div class="pold">${escapeHtml(p.old_price)}</div>` : '';
     return `
-        <div class="product-card" draggable="true" data-section="${sIdx}" data-index="${pIdx}" title="드래그해서 순서 변경">
+        <div class="product-card${soldOut ? ' sold-out' : ''}" draggable="true" data-section="${sIdx}" data-index="${pIdx}" title="드래그해서 순서 변경">
             <div class="img-wrap">
                 <img src="${escapeHtml(p.image)}" onerror="this.style.background='#fcc'" alt="">
+                ${soldOutBadge}
                 ${badge}
             </div>
             <div class="pname">${escapeHtml(p.name)}</div>
+            ${unit}
             ${oldPrice}
-            <div class="pprice">${escapeHtml(p.price)}${p.unit ? escapeHtml(p.unit) : ''}</div>
+            <div class="pprice">${escapeHtml(p.price)}</div>
             <div class="pactions">
                 <button class="btn-primary btn-small" onclick="editProduct(${sIdx},${pIdx})">수정</button>
                 <button class="btn-danger btn-small" onclick="removeProduct(${sIdx},${pIdx})">삭제</button>
@@ -755,27 +1149,29 @@ function productCardHtml(p, sIdx, pIdx) {
 }
 
 // ---- 드래그 앤 드롭 ----
-function attachDragHandlers() {
-    // 상품 카드
-    document.querySelectorAll('.product-card').forEach(card => {
+// 상품 카드 정렬: 같은 코너 안에서 순서 변경 + 다른 코너로 이동
+function enableProductDragSort(root = document) {
+    root.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('dragstart', onProductDragStart);
         card.addEventListener('dragend', onProductDragEnd);
         card.addEventListener('dragover', onProductDragOver);
         card.addEventListener('dragleave', onProductDragLeave);
         card.addEventListener('drop', onProductDrop);
     });
-    // 코너 블록
-    document.querySelectorAll('.section-block').forEach(block => {
+    // 상품 리스트 영역 (빈 영역에도 드롭 가능)
+    root.querySelectorAll('.product-list').forEach(list => {
+        list.addEventListener('dragover', onListDragOver);
+        list.addEventListener('drop', onListDrop);
+    });
+}
+
+function enableSectionDragSort(root = document) {
+    root.querySelectorAll('.section-block').forEach(block => {
         block.addEventListener('dragstart', onSectionDragStart);
         block.addEventListener('dragend', onSectionDragEnd);
         block.addEventListener('dragover', onSectionDragOver);
         block.addEventListener('dragleave', onSectionDragLeave);
         block.addEventListener('drop', onSectionDrop);
-    });
-    // 상품 리스트 영역 (빈 영역에도 드롭 가능)
-    document.querySelectorAll('.product-list').forEach(list => {
-        list.addEventListener('dragover', onListDragOver);
-        list.addEventListener('drop', onListDrop);
     });
 }
 
@@ -983,9 +1379,16 @@ function fillProductForm(p) {
     document.getElementById('p-old-price').value = p.old_price || '';
     document.getElementById('p-price').value = p.price || '';
     document.getElementById('p-unit').value = p.unit || '';
+    document.getElementById('p-sold-out').checked = p.sold_out === true;
     document.getElementById('p-badge-text').value = p.badge?.text || '';
     document.getElementById('p-badge-type').value = p.badge?.type || 'limit';
     document.getElementById('p-badge-anim').value = p.badge?.anim || '';
+    // 사진 업로드 영역 초기화
+    pendingImage = null;
+    document.getElementById('p-image-file').value = '';
+    document.getElementById('p-image-dir').value = IMAGE_UPLOAD_DIR;
+    document.getElementById('p-image-filename').value = '';
+    setUploadStatus('');
     updateImagePreview();
 }
 
@@ -1012,6 +1415,8 @@ function saveProduct() {
     const unit = document.getElementById('p-unit').value.trim();
     if (oldPrice) p.old_price = oldPrice;
     if (unit) p.unit = unit;
+    // 품절이 아니면 필드를 넣지 않아 기존 products.json 구조를 유지
+    if (document.getElementById('p-sold-out').checked) p.sold_out = true;
     const badgeText = document.getElementById('p-badge-text').value.trim();
     if (badgeText) {
         p.badge = {
