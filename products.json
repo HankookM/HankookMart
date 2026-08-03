@@ -15,6 +15,30 @@
       "tab_label": "인기상품",
       "products": [
         {
+          "name": "아이스크림(바)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/icebar.jpg?raw=true",
+          "price": "4,980원",
+          "old_price": "6,000원",
+          "unit": "10개",
+          "badge": {
+            "text": "HOT",
+            "type": "limit",
+            "anim": "blink"
+          }
+        },
+        {
+          "name": "아이스크림(콘,빵,설레임)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/icecorn.jpg?raw=true",
+          "price": "6,480원",
+          "old_price": "7,000원",
+          "unit": "5개",
+          "badge": {
+            "text": "HOT",
+            "type": "limit",
+            "anim": "blink"
+          }
+        },
+        {
           "name": "산지직송 제철 성주 참외",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/koreamelon.jpg?raw=true",
           "price": "9,800원",
@@ -111,30 +135,6 @@
           "price": "11,900",
           "old_price": "14,800원",
           "unit": "12입/박스"
-        },
-        {
-          "name": "아이스크림(바)",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/icebar.jpg?raw=true",
-          "price": "4,980원",
-          "old_price": "6,000원",
-          "unit": "10개",
-          "badge": {
-            "text": "HOT",
-            "type": "limit",
-            "anim": "blink"
-          }
-        },
-        {
-          "name": "아이스크림(콘,빵,설레임)",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/icecorn.jpg?raw=true",
-          "price": "6,480원",
-          "old_price": "7,000원",
-          "unit": "5개",
-          "badge": {
-            "text": "HOT",
-            "type": "limit",
-            "anim": "blink"
-          }
         },
         {
           "name": "해태 오예스",
