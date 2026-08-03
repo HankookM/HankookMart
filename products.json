@@ -39,30 +39,6 @@
           }
         },
         {
-          "name": "신라면",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/shinramyun.webp?raw=true",
-          "price": "2,980원",
-          "old_price": "4,500원",
-          "unit": "5입/멀티",
-          "badge": {
-            "text": "2봉 한정",
-            "type": "limit",
-            "anim": "pulse"
-          }
-        },
-        {
-          "name": "맥심 모카골드",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
-          "price": "25,900원",
-          "old_price": "32,800원",
-          "unit": "180t",
-          "badge": {
-            "text": "주말한정",
-            "type": "limit",
-            "anim": "blink"
-          }
-        },
-        {
           "name": "해태 과일촌 쥬스",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/fruitchon2.webp?raw=true",
           "price": "990원",
