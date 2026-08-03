@@ -61,18 +61,6 @@
             "type": "limit",
             "anim": "pulse"
           }
-        },
-        {
-          "name": "해태 과일촌 쥬스",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/fruitchon2.webp?raw=true",
-          "price": "990원",
-          "old_price": "1,980원",
-          "unit": "1.5L",
-          "badge": {
-            "text": "대박",
-            "type": "limit",
-            "anim": "blink"
-          }
         }
       ]
     },
