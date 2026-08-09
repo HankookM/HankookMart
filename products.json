@@ -121,6 +121,7 @@
           "price": "4,500원",
           "old_price": "6,900원",
           "unit": "300g",
+          "sold_out": true,
           "badge": {
             "text": "고기맛집",
             "type": "limit"
