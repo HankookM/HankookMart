@@ -3,7 +3,7 @@
     "name": "한국마트 비전점(뉴코아사거리)",
     "title": "💥 현제 이 페이지는 시범운영 페이지 입니다. 💥",
     "subtitle": "",
-    "period": "26/08/07(금) ~ 26/08/09(일)",
+    "period": "-",
     "phone": "031-655-8431",
     "footer_note": "※ 조기 품절될 수 있습니다."
   },
@@ -83,17 +83,6 @@
             "text": "대박",
             "type": "limit"
           }
-        },
-        {
-          "name": "과일촌",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/fruitchon2.webp?raw=true",
-          "price": "990원",
-          "old_price": "1,980원",
-          "unit": "1.5L",
-          "badge": {
-            "text": "대박",
-            "type": "limit"
-          }
         }
       ]
     },
@@ -121,7 +110,6 @@
           "price": "4,500원",
           "old_price": "6,900원",
           "unit": "300g",
-          "sold_out": true,
           "badge": {
             "text": "고기맛집",
             "type": "limit"
@@ -193,7 +181,7 @@
         {
           "name": "맥심 모카골드믹스",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
-          "price": "25,900원",
+          "price": "27,500원",
           "old_price": "32,800원",
           "unit": "180t"
         },
@@ -217,6 +205,17 @@
           "price": "2,980원",
           "old_price": "3,800원",
           "unit": "309g"
+        },
+        {
+          "name": "과일촌",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/fruitchon2.webp?raw=true",
+          "price": "1,980원",
+          "old_price": "2,500원",
+          "unit": "1.5L",
+          "badge": {
+            "text": "대박",
+            "type": "limit"
+          }
         }
       ]
     }
