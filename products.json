@@ -87,6 +87,21 @@
       ]
     },
     {
+      "id": "sec1787054666104",
+      "title": "농산코너",
+      "tab_label": "농산",
+      "layout": "list",
+      "products": [
+        {
+          "name": "거봉",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/products/fruits/%EA%B1%B0%EB%B4%89.webp?raw=true",
+          "price": "13,800원",
+          "old_price": "16,800원",
+          "unit": "2kg/박스"
+        }
+      ]
+    },
+    {
       "id": "meat",
       "title": "🥩 정육코너",
       "layout": "grid",
@@ -165,11 +180,39 @@
           "unit": "10kg"
         },
         {
+          "name": "영양쌀",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/rice/%EC%98%81%EC%96%91%EC%8C%8020.webp?raw=true",
+          "price": "62,800원",
+          "old_price": "74,800원",
+          "unit": "20kg"
+        },
+        {
           "name": "찰기가득 햇반",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/hatban.jpg?raw=true",
           "price": "11,900",
           "old_price": "14,800원",
           "unit": "12입/박스"
+        },
+        {
+          "name": "맥심 모카골드믹스",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
+          "price": "27,500원",
+          "old_price": "32,800원",
+          "unit": "180t"
+        },
+        {
+          "name": "맥심 아이스믹스",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/coffee/%EB%A7%A5%EC%8B%AC%EC%95%84%EC%9D%B4%EC%8A%A4110.webp?raw=true",
+          "price": "24,900원",
+          "old_price": "29,500원",
+          "unit": "100t"
+        },
+        {
+          "name": "맥심 아이스블랙믹스",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/coffee/%EB%A7%A5%EC%8B%AC%EC%95%84%EC%9D%B4%EC%8A%A4%EB%B8%94%EB%9E%99%EB%AF%B9%EC%8A%A4110.webp?raw=true",
+          "price": "15,900원",
+          "old_price": "19,500원",
+          "unit": "100t"
         },
         {
           "name": "해태 오예스",
@@ -211,13 +254,6 @@
           }
         },
         {
-          "name": "맥심 모카골드믹스",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
-          "price": "27,500원",
-          "old_price": "32,800원",
-          "unit": "180t"
-        },
-        {
           "name": "풀무원 냉면 5종",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/ramen/fullnangmyeon4.webp?raw=true",
           "price": "6,980원",
@@ -227,6 +263,52 @@
             "text": "대박",
             "type": "limit"
           }
+        },
+        {
+          "name": "크리넥스 데코소프트",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/etc/%ED%81%AC%EB%A6%AC%EB%84%A5%EC%8A%A4.webp?raw=true",
+          "price": "19,800원",
+          "old_price": "26,800원",
+          "unit": "30롤"
+        },
+        {
+          "name": "레쓰비 마일드(박스)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/letsbebox.webp?raw=true",
+          "price": "9,900원",
+          "old_price": "12,900원",
+          "unit": "175ml×30",
+          "badge": {
+            "text": "특가",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "코카 콜라 / 코카 콜라 제로",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/cok1.52.webp?raw=true",
+          "price": "각 2,980원",
+          "old_price": "각 3,980원",
+          "unit": "1.5L"
+        },
+        {
+          "name": "롯데 게토레이",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/%EA%B2%8C%ED%86%A0%EB%A0%88%EC%9D%B4.webp?raw=true",
+          "price": "1,980원",
+          "old_price": "2,980원",
+          "unit": "1.5L"
+        },
+        {
+          "name": "펩시 콜라 / 칠성 사이다",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/pepsi7cider2.webp?raw=true",
+          "price": "각 1,980원",
+          "old_price": "각 3,980원",
+          "unit": "2L"
+        },
+        {
+          "name": "스프라이트 / 스프라이트 제로",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/drink/%EC%8A%A4%EC%8A%A4.webp?raw=true",
+          "price": "각 1,980원",
+          "old_price": "각 2,980원",
+          "unit": "1.5L"
         }
       ]
     }
