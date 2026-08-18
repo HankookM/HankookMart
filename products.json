@@ -15,16 +15,6 @@
       "tab_label": "인기상품",
       "products": [
         {
-          "name": "[복날특가] 하림 삼계닭",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/harimnewchiken2.webp?raw=true",
-          "price": "8,900원",
-          "unit": "2마리",
-          "badge": {
-            "text": "말복특가",
-            "type": "limit"
-          }
-        },
-        {
           "name": "실속란",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
           "price": "7,980원",
@@ -32,24 +22,6 @@
           "unit": "30구/판",
           "badge": {
             "text": "복날특가",
-            "type": "limit"
-          }
-        },
-        {
-          "name": "맥심 모카골드믹스",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
-          "price": "25,900원",
-          "old_price": "32,800원",
-          "unit": "180t"
-        },
-        {
-          "name": "과일촌",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/fruitchon2.webp?raw=true",
-          "price": "990원",
-          "old_price": "2,500원",
-          "unit": "1.5L",
-          "badge": {
-            "text": "대박",
             "type": "limit"
           }
         },
@@ -111,28 +83,6 @@
             "type": "limit",
             "anim": "pulse"
           }
-        }
-      ]
-    },
-    {
-      "id": "sec1786670820291",
-      "title": "농산코너",
-      "tab_label": "농산코너",
-      "layout": "list",
-      "products": [
-        {
-          "name": "단호박(특)",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/pumpkin.webp?raw=true",
-          "price": "9,800원",
-          "old_price": "12,800원",
-          "unit": "8개/망"
-        },
-        {
-          "name": "산지육쪽마늘",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/garlic1.webp?raw=true",
-          "price": "19,800원",
-          "old_price": "22,800원",
-          "unit": "100개/접"
         }
       ]
     },
@@ -248,6 +198,24 @@
           "price": "2,980원",
           "old_price": "3,800원",
           "unit": "309g"
+        },
+        {
+          "name": "과일촌",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/fruitchon2.webp?raw=true",
+          "price": "1,980원",
+          "old_price": "2,500원",
+          "unit": "1.5L",
+          "badge": {
+            "text": "대박",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "맥심 모카골드믹스",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
+          "price": "27,500원",
+          "old_price": "32,800원",
+          "unit": "180t"
         },
         {
           "name": "풀무원 냉면 5종",
