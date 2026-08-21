@@ -17,11 +17,33 @@
         {
           "name": "실속란",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
-          "price": "7,980원",
+          "price": "6,980원",
           "old_price": "11,800원",
           "unit": "30구/판",
           "badge": {
-            "text": "복날특가",
+            "text": "2판한정",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "신라면",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/shinramyun.webp?raw=true",
+          "price": "2,980원",
+          "old_price": "4,500원",
+          "unit": "5입/멀티",
+          "badge": {
+            "text": "2봉한정",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "맥심 모카골드믹스",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
+          "price": "25,500원",
+          "old_price": "32,800원",
+          "unit": "180t",
+          "badge": {
+            "text": "주말특가",
             "type": "limit"
           }
         },
@@ -120,17 +142,6 @@
           }
         },
         {
-          "name": "한돈 도깨비살",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%8F%84%EA%B9%A8%EB%B9%84%EC%82%B4.webp?raw=true",
-          "price": "4,500원",
-          "old_price": "6,900원",
-          "unit": "300g",
-          "badge": {
-            "text": "고기맛집",
-            "type": "limit"
-          }
-        },
-        {
           "name": "한돈 생 등갈비",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%93%B1%EA%B0%88%EB%B9%84.webp?raw=true",
           "price": "11,800원",
@@ -142,9 +153,9 @@
           }
         },
         {
-          "name": "한우 꽃등심",
+          "name": "한우 채끝등심",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/rhcemdtla.webp?raw=true",
-          "price": "12,800원",
+          "price": "11,800원",
           "old_price": "15,800원",
           "unit": "100g",
           "badge": {
@@ -162,6 +173,17 @@
             "text": "국내산",
             "type": "limit",
             "anim": "blink"
+          }
+        },
+        {
+          "name": "한돈 도깨비살",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%8F%84%EA%B9%A8%EB%B9%84%EC%82%B4.webp?raw=true",
+          "price": "4,500원",
+          "old_price": "6,900원",
+          "unit": "300g",
+          "badge": {
+            "text": "고기맛집",
+            "type": "limit"
           }
         }
       ]
@@ -192,13 +214,6 @@
           "price": "11,900",
           "old_price": "14,800원",
           "unit": "12입/박스"
-        },
-        {
-          "name": "맥심 모카골드믹스",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
-          "price": "27,500원",
-          "old_price": "32,800원",
-          "unit": "180t"
         },
         {
           "name": "맥심 아이스믹스",
