@@ -39,7 +39,7 @@
         {
           "name": "맥심 모카골드믹스",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
-          "price": "25,500원",
+          "price": "25,900원",
           "old_price": "32,800원",
           "unit": "180t",
           "badge": {
@@ -50,9 +50,9 @@
         {
           "name": "수박",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/watermelon.webp?raw=true",
-          "price": "16,800원",
+          "price": "9,900원",
           "old_price": "19,800원",
-          "unit": "6~7kg",
+          "unit": "6kg 이상",
           "badge": {
             "text": "주말특가",
             "type": "limit"
@@ -95,16 +95,11 @@
           }
         },
         {
-          "name": "꿀맛 안동 사과 (부사)",
-          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
-          "price": "14,800원",
-          "old_price": "19,800원",
-          "unit": "5개/봉",
-          "badge": {
-            "text": "꿀맛",
-            "type": "limit",
-            "anim": "pulse"
-          }
+          "name": "크리넥스 데코소프트",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/etc/%ED%81%AC%EB%A6%AC%EB%84%A5%EC%8A%A4.webp?raw=true",
+          "price": "16,800원",
+          "old_price": "26,800원",
+          "unit": "30롤"
         }
       ]
     },
@@ -120,6 +115,32 @@
           "price": "13,800원",
           "old_price": "16,800원",
           "unit": "2kg/박스"
+        },
+        {
+          "name": "샤인머스켓",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%83%A4%EB%A8%B8.webp?raw=true",
+          "price": "16,800",
+          "old_price": "19,800",
+          "unit": "2kg/박스"
+        },
+        {
+          "name": "딱복",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EB%94%B1%EB%B3%B5.webp?raw=true",
+          "price": "최저가 19,800",
+          "unit": "1박스"
+        },
+        {
+          "name": "꿀맛 안동 사과 (부사)",
+          "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
+          "price": "14,800원",
+          "old_price": "19,800원",
+          "unit": "5개/봉",
+          "sold_out": true,
+          "badge": {
+            "text": "꿀맛",
+            "type": "limit",
+            "anim": "pulse"
+          }
         }
       ]
     },
@@ -278,13 +299,6 @@
             "text": "대박",
             "type": "limit"
           }
-        },
-        {
-          "name": "크리넥스 데코소프트",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/etc/%ED%81%AC%EB%A6%AC%EB%84%A5%EC%8A%A4.webp?raw=true",
-          "price": "19,800원",
-          "old_price": "26,800원",
-          "unit": "30롤"
         },
         {
           "name": "레쓰비 마일드(박스)",
