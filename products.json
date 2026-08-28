@@ -15,20 +15,52 @@
       "tab_label": "인기상품",
       "products": [
         {
+          "name": "신라면",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/shinramyun.webp?raw=true",
+          "price": "2,980원",
+          "old_price": "4,500원",
+          "unit": "5입/멀티",
+          "badge": {
+            "text": "2봉한정",
+            "type": "limit"
+          }
+        },
+        {
           "name": "실속란",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
           "price": "7,980원",
           "old_price": "11,800원",
-          "unit": "30구/판"
+          "unit": "30구/판",
+          "badge": {
+            "text": "대박",
+            "type": "limit"
+          }
         },
         {
           "name": "맥심 모카골드믹스",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/%EB%A7%A5%EC%8B%AC%EC%BB%A4%ED%94%BC180.webp?raw=true",
-          "price": "27,500원",
+          "price": "25,900원",
           "old_price": "32,800원",
           "unit": "180t",
           "badge": {
             "text": "주말특가",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "수박",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/watermelon.webp?raw=true",
+          "price": "9,900원",
+          "unit": "6kg이상"
+        },
+        {
+          "name": "샤인머스켓",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%83%A4%EB%A8%B8.webp?raw=true",
+          "price": "9,800원",
+          "old_price": "15,800",
+          "unit": "2kg/박스",
+          "badge": {
+            "text": "특가",
             "type": "limit"
           }
         },
@@ -59,9 +91,13 @@
         {
           "name": "크리넥스 데코소프트",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/etc/%ED%81%AC%EB%A6%AC%EB%84%A5%EC%8A%A4.webp?raw=true",
-          "price": "19,800원",
+          "price": "16,800원",
           "old_price": "26,800원",
-          "unit": "30롤"
+          "unit": "30롤",
+          "badge": {
+            "text": "주말세일",
+            "type": "limit"
+          }
         }
       ]
     },
@@ -72,6 +108,37 @@
       "layout": "list",
       "products": [
         {
+          "name": "고냉지 배추",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/%EB%A7%9D%EB%B0%B0%EC%B6%94.webp?raw=true",
+          "price": "5,800원",
+          "old_price": "9,800원",
+          "unit": "3통/망",
+          "badge": {
+            "text": "주말특가",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "홍로",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%99%8D%EB%A1%9C.webp?raw=true",
+          "price": "9,800원",
+          "unit": "1봉",
+          "badge": {
+            "text": "꿀들었어요",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "아오리사과",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%95%84%EC%98%A4%EB%A6%AC.webp?raw=true",
+          "price": "9,800원",
+          "unit": "1봉",
+          "badge": {
+            "text": "맛있어요",
+            "type": "limit"
+          }
+        },
+        {
           "name": "거봉",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/products/fruits/%EA%B1%B0%EB%B4%89.webp?raw=true",
           "price": "13,800원",
@@ -79,11 +146,21 @@
           "unit": "2kg/박스"
         },
         {
-          "name": "샤인머스켓",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%83%A4%EB%A8%B8.webp?raw=true",
-          "price": "16,800",
-          "old_price": "19,800",
-          "unit": "2kg/박스"
+          "name": "영동 포도",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%98%81%EB%8F%99%ED%8F%AC%EB%8F%84.webp?raw=true",
+          "price": "15,800원",
+          "old_price": "19,800원",
+          "unit": "3kg/박스"
+        },
+        {
+          "name": "햇배",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%96%87%EB%B0%B0.webp?raw=true",
+          "price": "5,800원",
+          "unit": "2개",
+          "badge": {
+            "text": "꿀맛",
+            "type": "limit"
+          }
         },
         {
           "name": "딱복",
@@ -103,16 +180,6 @@
             "text": "꿀맛",
             "type": "limit",
             "anim": "pulse"
-          }
-        },
-        {
-          "name": "햇배",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%96%87%EB%B0%B0.webp?raw=true",
-          "price": "5,800",
-          "unit": "2개",
-          "badge": {
-            "text": "꿀맛",
-            "type": "limit"
           }
         }
       ]
@@ -136,13 +203,12 @@
           }
         },
         {
-          "name": "한우 채끝등심",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/rhcemdtla.webp?raw=true",
-          "price": "11,800원",
-          "old_price": "15,800원",
+          "name": "한돈 안심",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%8F%BC%EC%A7%80%EC%95%88%EC%8B%AC.webp?raw=true",
+          "price": "1,000원",
           "unit": "100g",
           "badge": {
-            "text": "1+ 국내산",
+            "text": "대박",
             "type": "limit"
           }
         },
@@ -159,6 +225,12 @@
           }
         },
         {
+          "name": "마장동 한우 1++ 사태",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EC%9A%B0%EC%82%AC%ED%83%9C.webp?raw=true",
+          "price": "3,980",
+          "unit": "100g"
+        },
+        {
           "name": "한돈 도깨비살",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%8F%84%EA%B9%A8%EB%B9%84%EC%82%B4.webp?raw=true",
           "price": "4,500원",
@@ -168,6 +240,12 @@
             "text": "고기맛집",
             "type": "limit"
           }
+        },
+        {
+          "name": "한돈 냉동 찜갈비",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EB%8F%88%EB%83%89%EC%B0%9C%EC%A0%91%EC%8B%9C.webp?raw=true",
+          "price": "13,800원",
+          "unit": "1kg"
         }
       ]
     },
