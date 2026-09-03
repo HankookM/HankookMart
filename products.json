@@ -15,19 +15,19 @@
       "tab_label": "인기상품",
       "products": [
         {
-          "name": "한돈 생 등뼈",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%93%B1%EB%BC%88.webp?raw=true",
-          "price": "6,980",
-          "unit": "2kg",
+          "name": "신라면",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/shinramyun.webp?raw=true",
+          "price": "2,980원",
+          "unit": "5입/멀티",
           "badge": {
-            "text": "대박",
+            "text": "2봉한정",
             "type": "limit"
           }
         },
         {
           "name": "한돈 생 앞다리살",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EC%95%9E%EB%8B%A4%EB%A6%AC.webp?raw=true",
-          "price": "6,980원",
+          "price": "7,980원",
           "old_price": "10,800원",
           "unit": "600g/근",
           "badge": {
@@ -91,7 +91,7 @@
         {
           "name": "크리넥스 데코소프트",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/etc/%ED%81%AC%EB%A6%AC%EB%84%A5%EC%8A%A4.webp?raw=true",
-          "price": "19,800원",
+          "price": "16,800원",
           "old_price": "26,800원",
           "unit": "30롤",
           "badge": {
@@ -130,13 +130,13 @@
         {
           "name": "무화과",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EB%AC%B4%ED%99%94%EA%B3%BC.webp?raw=true",
-          "price": "9,800",
+          "price": "7,800",
           "unit": "1박스"
         },
         {
           "name": "거봉",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/products/fruits/%EA%B1%B0%EB%B4%89.webp?raw=true",
-          "price": "15,800원",
+          "price": "13,800원",
           "unit": "2kg/박스"
         },
         {
@@ -152,7 +152,7 @@
         {
           "name": "영동 포도",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%98%81%EB%8F%99%ED%8F%AC%EB%8F%84.webp?raw=true",
-          "price": "17,800원",
+          "price": "15,800원",
           "unit": "3kg/박스"
         },
         {
@@ -204,6 +204,12 @@
             "type": "limit",
             "anim": "blink"
           }
+        },
+        {
+          "name": "한돈 생 등심",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EB%8F%88%EB%93%B1%EC%8B%AC.webp?raw=true",
+          "price": "7,280원",
+          "unit": "600g/근"
         },
         {
           "name": "마장동 한우 1++ 사태",
