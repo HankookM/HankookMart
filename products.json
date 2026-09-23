@@ -15,6 +15,17 @@
       "tab_label": "인기상품",
       "products": [
         {
+          "name": "실속란",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
+          "price": "5,980원",
+          "old_price": "11,800원",
+          "unit": "30구/판",
+          "badge": {
+            "text": "2판한정",
+            "type": "limit"
+          }
+        },
+        {
           "name": "신라면",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/shinramyun.jpg?raw=true",
           "price": "2,980",
@@ -25,14 +36,24 @@
           }
         },
         {
-          "name": "실속란",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
-          "price": "5,980원",
-          "old_price": "11,800원",
-          "unit": "30구/판",
+          "name": "백오이",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/%EC%98%A4%EC%9D%B4.webp?raw=true",
+          "price": "3,980원",
+          "unit": "10개/봉",
           "badge": {
-            "text": "2판한정",
+            "text": "대박",
             "type": "limit"
+          }
+        },
+        {
+          "name": "마장동 한우 국거리",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/gukgeori.jpg?raw=true",
+          "price": "3,980원",
+          "unit": "100g",
+          "badge": {
+            "text": "1++",
+            "type": "limit",
+            "anim": "blink"
           }
         },
         {
@@ -69,16 +90,6 @@
             "text": "국내산",
             "type": "limit",
             "anim": "blink"
-          }
-        },
-        {
-          "name": "한돈 생등뼈",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%93%B1%EB%BC%88.webp?raw=true",
-          "price": "6,980",
-          "unit": "2kg",
-          "badge": {
-            "text": "대박",
-            "type": "limit"
           }
         },
         {
@@ -125,38 +136,18 @@
       "layout": "list",
       "products": [
         {
-          "name": "햇배",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%96%87%EB%B0%B0.webp?raw=true",
-          "price": "5,800원",
-          "unit": "2개",
-          "badge": {
-            "text": "꿀맛",
-            "type": "limit"
-          }
-        },
-        {
           "name": "신고배",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%96%87%EB%B0%B0.webp?raw=true",
           "price": "9,800원",
           "unit": "4개/봉"
         },
         {
-          "name": "홍로",
+          "name": "사과",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%99%8D%EB%A1%9C.webp?raw=true",
-          "price": "9,800원",
+          "price": "9,800원~",
           "unit": "1봉",
           "badge": {
             "text": "꿀들었어요",
-            "type": "limit"
-          }
-        },
-        {
-          "name": "아오리사과",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%95%84%EC%98%A4%EB%A6%AC.webp?raw=true",
-          "price": "9,800원",
-          "unit": "1봉",
-          "badge": {
-            "text": "맛있어요",
             "type": "limit"
           }
         },
@@ -208,18 +199,6 @@
       "tab_label": "정육코너",
       "products": [
         {
-          "name": "한우 국거리",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/gukgeori.jpg?raw=true",
-          "price": "9,900원",
-          "old_price": "15,800원",
-          "unit": "1팩",
-          "badge": {
-            "text": "국내산",
-            "type": "limit",
-            "anim": "blink"
-          }
-        },
-        {
           "name": "한돈 생 등심",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EB%8F%88%EB%93%B1%EC%8B%AC.webp?raw=true",
           "price": "7,280원",
@@ -255,6 +234,12 @@
             "text": "고기맛집",
             "type": "limit"
           }
+        },
+        {
+          "name": "한돈 생갈비",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EB%8F%88%EC%83%9D%EA%B0%88%EB%B9%84.webp?raw=true",
+          "price": "9,900원",
+          "unit": "600g/근"
         }
       ]
     },
