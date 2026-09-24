@@ -17,23 +17,9 @@
         {
           "name": "실속란",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
-          "price": "5,980원",
+          "price": "6,980원",
           "old_price": "11,800원",
-          "unit": "30구/판",
-          "badge": {
-            "text": "2판한정",
-            "type": "limit"
-          }
-        },
-        {
-          "name": "신라면",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/shinramyun.jpg?raw=true",
-          "price": "2,980",
-          "unit": "5입/멀티",
-          "badge": {
-            "text": "2봉한정",
-            "type": "limit"
-          }
+          "unit": "30구/판"
         },
         {
           "name": "백오이",
