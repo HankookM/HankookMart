@@ -34,19 +34,13 @@
         {
           "name": "마장동 한우 국거리",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/gukgeori.jpg?raw=true",
-          "price": "3,980원",
+          "price": "4,500원",
           "unit": "100g",
           "badge": {
             "text": "1++",
             "type": "limit",
             "anim": "blink"
           }
-        },
-        {
-          "name": "양파",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/%EC%96%91%ED%8C%8C15.webp?raw=true",
-          "price": "9,800원",
-          "unit": "15kg"
         },
         {
           "name": "한돈 생 앞다리살",
@@ -166,32 +160,6 @@
       "layout": "grid",
       "tab_label": "정육코너",
       "products": [
-        {
-          "name": "한돈 생 등심",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EB%8F%88%EB%93%B1%EC%8B%AC.webp?raw=true",
-          "price": "7,280원",
-          "unit": "600g/근"
-        },
-        {
-          "name": "마장동 한우 1++ 사태",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EC%9A%B0%EC%82%AC%ED%83%9C.webp?raw=true",
-          "price": "3,980",
-          "unit": "100g",
-          "badge": {
-            "text": "1++",
-            "type": "limit"
-          }
-        },
-        {
-          "name": "한우 1++ 채끝등심",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EC%B1%84%EB%81%9D%EB%93%B1%EC%8B%AC.webp?raw=true",
-          "price": "11,800",
-          "unit": "100g",
-          "badge": {
-            "text": "1++",
-            "type": "limit"
-          }
-        },
         {
           "name": "한돈 도깨비살",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%8F%84%EA%B9%A8%EB%B9%84%EC%82%B4.webp?raw=true",
