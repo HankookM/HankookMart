@@ -49,24 +49,6 @@
           "unit": "15kg"
         },
         {
-          "name": "안동사과) 선물세트 14수",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%95%88%EB%8F%99%EC%82%AC%EA%B3%BC%EC%84%A0%EB%AC%BC%EC%84%B8%ED%8A%B814.webp?raw=true",
-          "price": "75,800원",
-          "unit": "14수"
-        },
-        {
-          "name": "안동사과) 선물세트 11수",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%95%88%EB%8F%99%EC%82%AC%EA%B3%BC%EC%84%A0%EB%AC%BC%EC%84%B8%ED%8A%B811.webp?raw=true",
-          "price": "89,000원",
-          "unit": "11수"
-        },
-        {
-          "name": "배 선물세트",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EB%B0%B0%EC%84%A0%EB%AC%BC%EC%84%B8%ED%8A%B89.webp?raw=true",
-          "price": "49,800원",
-          "unit": "8~10수"
-        },
-        {
           "name": "한돈 생 앞다리살",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EC%95%9E%EB%8B%A4%EB%A6%AC.webp?raw=true",
           "price": "7,980원",
