@@ -45,7 +45,7 @@
         {
           "name": "한돈 생 앞다리살",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EC%95%9E%EB%8B%A4%EB%A6%AC.webp?raw=true",
-          "price": "7,980원",
+          "price": "6,980원",
           "old_price": "10,800원",
           "unit": "600g/근",
           "badge": {
@@ -170,12 +170,6 @@
             "text": "고기맛집",
             "type": "limit"
           }
-        },
-        {
-          "name": "한돈 생갈비",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EB%8F%88%EC%83%9D%EA%B0%88%EB%B9%84.webp?raw=true",
-          "price": "9,900원",
-          "unit": "600g/근"
         }
       ]
     },
