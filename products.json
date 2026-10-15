@@ -258,7 +258,7 @@
         {
           "name": "해태 오예스",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/oyes.jpg?raw=true",
-          "price": "6,980원",
+          "price": "5,980원",
           "old_price": "7,980원",
           "unit": "16+2입"
         },
@@ -356,6 +356,36 @@
           "price": "각 1,980원",
           "old_price": "각 2,980원",
           "unit": "1.5L"
+        },
+        {
+          "name": "삼육 고칼슘 두유",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/drink/%EC%82%BC%EC%9C%A1%EA%B3%A0%EC%B9%BC%EC%8A%98%EB%91%90%EC%9C%A0.webp?raw=true",
+          "price": "9,900원",
+          "unit": "190ml×24"
+        },
+        {
+          "name": "오뚜기 양조식초",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/condiment/yangjoviniger.webp?raw=true",
+          "price": "1,980원",
+          "unit": "1.5L"
+        },
+        {
+          "name": "백설 고소한 참기름",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/condiment/gosoharmfullcharmoil.webp?raw=true",
+          "price": "6,980원",
+          "unit": "450ml"
+        },
+        {
+          "name": "백설 콩식용유",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/condiment/beanoil.jpg?raw=true",
+          "price": "5,980원",
+          "unit": "1.8L"
+        },
+        {
+          "name": "진간장 골드 기획",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/%5Cresource/grocery/condiment/%EC%A7%84%EA%B0%84%EC%9E%A51.7-500.webp?raw=true",
+          "price": "8,900원",
+          "unit": "1.7L+500ml"
         }
       ]
     }
