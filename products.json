@@ -296,12 +296,6 @@
           "unit": "3번들"
         },
         {
-          "name": "치즈샌드",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/%EC%B9%98%EC%A6%88%EC%83%8C%EB%93%9C.webp?raw=true",
-          "price": "2,980원",
-          "unit": "1박스"
-        },
-        {
           "name": "맛동산 미니번들",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/products/snac/%EB%A7%9B%EB%8F%99%EC%82%B03%EB%B2%88%EB%93%A4.webp?raw=true",
           "price": "2,980",
