@@ -236,6 +236,26 @@
           "unit": "1.5L"
         },
         {
+          "name": "초코파이 기획",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/%EC%B4%88%EC%BD%94%ED%8C%8C%EC%9D%B4.webp?raw=true",
+          "price": "7,980원",
+          "unit": "30입",
+          "badge": {
+            "text": "전단세일",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "스팸 클래식 번들",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/can/spam3.webp?raw=true",
+          "price": "9,900원",
+          "unit": "300g×3",
+          "badge": {
+            "text": "전단세일",
+            "type": "limit"
+          }
+        },
+        {
           "name": "영양쌀",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/rice/%EC%98%81%EC%96%91%EC%8C%8020.webp?raw=true",
           "price": "59,900원",
@@ -295,13 +315,6 @@
           "price": "각 1,980원",
           "old_price": "각 3,980원",
           "unit": "2L"
-        },
-        {
-          "name": "스프라이트 / 스프라이트 제로",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/drink/%EC%8A%A4%EC%8A%A4.webp?raw=true",
-          "price": "각 1,980원",
-          "old_price": "각 2,980원",
-          "unit": "1.5L"
         },
         {
           "name": "삼육 고칼슘 두유",
