@@ -3,7 +3,7 @@
     "name": "한국마트 비전점(뉴코아사거리)",
     "title": "💥 현제 이 페이지는 시범운영 페이지 입니다. 💥",
     "subtitle": "",
-    "period": "10/16 ~ 10/18",
+    "period": "11/11 ~ 11/24",
     "phone": "031-655-8431",
     "footer_note": "※ 조기 품절될 수 있습니다."
   },
@@ -27,34 +27,17 @@
         {
           "name": "씨암닭왕란",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
-          "price": "8,900",
+          "price": "5,980",
           "unit": "30구/판",
           "badge": {
-            "text": "2판한정",
-            "type": "limit"
-          }
-        },
-        {
-          "name": "실속란",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/egg30.webp?raw=true",
-          "price": "6,980원",
-          "old_price": "11,800원",
-          "unit": "30구/판"
-        },
-        {
-          "name": "백오이",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/%EC%98%A4%EC%9D%B4.webp?raw=true",
-          "price": "3,980원",
-          "unit": "10개/봉",
-          "badge": {
-            "text": "대박",
+            "text": "3판한정",
             "type": "limit"
           }
         },
         {
           "name": "한돈생목살",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EB%AA%A9%EC%82%B4.webp?raw=true",
-          "price": "11,800원",
+          "price": "8,900원",
           "unit": "600g/근",
           "badge": {
             "text": "대박",
@@ -62,14 +45,13 @@
           }
         },
         {
-          "name": "마장동 한우 국거리",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/gukgeori.jpg?raw=true",
-          "price": "4,500원",
-          "unit": "100g",
+          "name": "한돈 생등뼈",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/ppyeojjim.png?raw=true",
+          "price": "6,980원",
+          "unit": "2kg",
           "badge": {
-            "text": "1++",
-            "type": "limit",
-            "anim": "blink"
+            "text": "전단세일",
+            "type": "limit"
           }
         },
         {
@@ -87,20 +69,16 @@
         {
           "name": "크리넥스 데코소프트",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/etc/%ED%81%AC%EB%A6%AC%EB%84%A5%EC%8A%A4.webp?raw=true",
-          "price": "19,800원",
+          "price": "13,900원",
           "old_price": "26,800원",
-          "unit": "30롤",
-          "badge": {
-            "text": "주말세일",
-            "type": "limit"
-          }
+          "unit": "30롤"
         },
         {
           "name": "아이스크림(바)",
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/grocery/snac/icebar.jpg?raw=true",
-          "price": "4,980원",
-          "old_price": "6,000원",
-          "unit": "10개",
+          "price": "1,000원",
+          "old_price": "1,800원",
+          "unit": "3개",
           "badge": {
             "text": "HOT",
             "type": "limit",
@@ -118,6 +96,47 @@
             "type": "limit",
             "anim": "blink"
           }
+        },
+        {
+          "name": "알타리(특)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/%EC%95%8C%ED%83%80%EB%A6%AC.webp?raw=true",
+          "price": "8,900",
+          "unit": "3단",
+          "badge": {
+            "text": "전단세일",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "흙쪽파(특)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/veg/%ED%9D%99%EC%AA%BD%ED%8C%8C.webp?raw=true",
+          "price": "2,500원",
+          "old_price": "2,980원",
+          "unit": "1단",
+          "badge": {
+            "text": "추가전단세일",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "고당도 감귤",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EA%B0%90%EA%B7%A4%EB%B0%95%EC%8A%A4.webp?raw=true",
+          "price": "9,900원",
+          "unit": "1박스",
+          "badge": {
+            "text": "전단세일",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "대봉감(특)",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EB%8C%80%EB%B4%89%EA%B0%90.webp?raw=true",
+          "price": "9,900원",
+          "unit": "1박스",
+          "badge": {
+            "text": "전단세일",
+            "type": "limit"
+          }
         }
       ]
     },
@@ -128,54 +147,10 @@
       "layout": "list",
       "products": [
         {
-          "name": "신고배",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%96%87%EB%B0%B0.webp?raw=true",
-          "price": "9,800원",
-          "unit": "4개/봉"
-        },
-        {
-          "name": "사과",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%ED%99%8D%EB%A1%9C.webp?raw=true",
-          "price": "9,800원~",
-          "unit": "1봉",
-          "badge": {
-            "text": "꿀들었어요",
-            "type": "limit"
-          }
-        },
-        {
-          "name": "샤인머스켓",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%83%A4%EB%A8%B8.webp?raw=true",
-          "price": "7,800~9,800원",
-          "unit": "2kg/박스",
-          "badge": {
-            "text": "특가",
-            "type": "limit"
-          }
-        },
-        {
-          "name": "거봉",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/products/fruits/%EA%B1%B0%EB%B4%89.webp?raw=true",
-          "price": "12,800원",
-          "unit": "2kg/박스"
-        },
-        {
-          "name": "샤인머스켓",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%83%A4%EC%9D%B8%EB%A8%B8%EC%8A%A4%EC%BC%93%EB%8C%80.webp?raw=true",
-          "price": "15,800원",
-          "unit": "4kg/박스"
-        },
-        {
-          "name": "송산 포도",
-          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/fruits/%EC%86%A1%EC%82%B0%ED%8F%AC%EB%8F%84.webp?raw=true",
-          "price": "19,800원",
-          "unit": "3kg/박스"
-        },
-        {
-          "name": "꿀맛 안동 사과 (부사)",
+          "name": "꿀맛 안동 사과",
           "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
           "price": "9,800원",
-          "unit": "4개/봉",
+          "unit": "1봉",
           "badge": {
             "text": "꿀맛",
             "type": "limit",
@@ -195,6 +170,27 @@
           "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%EC%B9%98%EB%A7%88%EC%82%B4webp.webp?raw=true",
           "price": "15,000",
           "old_price": "18,900",
+          "unit": "100g",
+          "badge": {
+            "text": "1++",
+            "type": "limit"
+          }
+        },
+        {
+          "name": "마장동 한우 국거리",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/gukgeori.jpg?raw=true",
+          "price": "4,500원",
+          "unit": "100g",
+          "badge": {
+            "text": "1++",
+            "type": "limit",
+            "anim": "blink"
+          }
+        },
+        {
+          "name": "한우 사태",
+          "image": "https://github.com/HankookM/HankookMart/blob/main/resource/meat/%ED%95%9C%EC%9A%B0%EC%82%AC%ED%83%9C.webp?raw=true",
+          "price": "3,980원",
           "unit": "100g",
           "badge": {
             "text": "1++",
